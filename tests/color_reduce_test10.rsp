@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx num_colors=2,4,8,16,32,64,128,256  ./filters/color_reduce_libimagequant.fx c:\dev\filter-test\test-logos\*.*

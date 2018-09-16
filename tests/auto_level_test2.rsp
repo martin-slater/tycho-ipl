@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx ./filters/auto_level_opencv.fx ./images/images/*.jpg

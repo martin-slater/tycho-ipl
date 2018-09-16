@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx kernel_size=27 color_distance=0.1,0.2,0.3 ./filters/color_reduce_im_mean_shift.fx ./images/images/*.*

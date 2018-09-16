@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx clip_percent=0,0.5,1,2,4,8,16 ./filters/auto_level_histogram_clip.fx ./images/images/*.jpg

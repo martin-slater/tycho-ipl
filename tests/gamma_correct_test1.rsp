@@ -1,0 +1,1 @@
+--output_dir=./temp/ --experiment gamma=0.0,0.1,0.4,0.8,1.2,1.6 ../filters/gamma_correct.fx  ./images/images/*.*

@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx  tone_adjust=-32,-16,-8,0,8,16,32 ./filters/sepia_yiq.fx ./images/images/*.jpg

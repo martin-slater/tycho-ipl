@@ -1,0 +1,16 @@
+Thumbs.db
+test-output/
+t1/
+test-images2/
+Debug/
+Release/
+ipch/
+temp/
+Temp/
+*.suo
+*.sdf
+*.opensdf
+build/
+
+
+

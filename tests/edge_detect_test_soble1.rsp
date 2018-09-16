@@ -1,0 +1,1 @@
+--output_dir=./temp/ --experiment --launch ../filters/tests/test_edge_sobel.fx ../test-images/*.*

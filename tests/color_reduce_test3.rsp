@@ -1,0 +1,1 @@
+--output_dir=./temp/ --launch --experiment --prefilter=./filters/std_prefilter.fx num_colors=256,128,64,32,16,8,4,2 ./filters/color_reduce_median_cut.fx ./images/images/*.*

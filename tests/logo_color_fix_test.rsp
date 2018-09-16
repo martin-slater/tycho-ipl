@@ -1,0 +1,1 @@
+--output_dir=./temp/ --experiment --launch ./filters/tests/test_logo_colour_fix.fx ./test-logos/*.*
