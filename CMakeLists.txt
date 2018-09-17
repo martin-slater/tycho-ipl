@@ -31,6 +31,8 @@ if(" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
 endif()
 
 # Configure OpenCV build. Disable as much as we can, we just want the lib
+set(OpenCV_DIR ${CMAKE_SOURCE_DIR}/externals/opencv)
+
 option(BUILD_EXAMPLES OFF)
 option(BUILD_TESTS OFF)
 option(BUILD_PERF_TESTS OFF)
@@ -48,7 +50,7 @@ option(WITH_QUICKTIME OFF)
 option(WITH_QTKIT OFF)
 option(WITH_FFMPEG OFF)
 option(WITH_AVFOUNDATION OFF)
-add_subdirectory(externals/opencv)
+add_subdirectory(${OpenCV_DIR})
 
 set(OPENCV_INCLUDE_DIRS
     ${OpenCV_DIR}/include
@@ -58,9 +60,7 @@ set(OPENCV_INCLUDE_DIRS
     ${OpenCV_DIR}/modules/imgcodecs/include
     ${OpenCV_DIR}/modules/videoio/include
     ${OpenCV_DIR}/modules/photo/include
-    ../build)
-
-
+    ${CMAKE_SOURCE_DIR}/build)
 
 # Setup compiler warning level
 if(MSVC)
