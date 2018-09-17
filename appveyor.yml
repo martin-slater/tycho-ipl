@@ -17,6 +17,9 @@ environment:
 matrix:
   fast_finish: true
 
+install:
+- git submodule update --init --recursive
+
 # skip unsupported combinations
 init:
 - set arch=
@@ -43,4 +46,3 @@ only_commits:
     - src/
     - driver/
     - 3rdparty/
-    
