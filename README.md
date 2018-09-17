@@ -10,6 +10,14 @@ The library uses C++17 functionality so a modern compiler toolchain is needed (V
 brew install --with-clang llvm
 ```
 
+## Cloning
+
+OpenCV is referenced as a submodule so you need to clone with
+
+```
+git clone git@github.com:martin-slater/tycho-ipl.git --recursive
+```
+
 ## Building
 
 CMake is used to generate the specific build system for your platform.  
@@ -17,9 +25,6 @@ CMake is used to generate the specific build system for your platform.
 To generate the build system with the default cmake generator.
 
 ```bash
-git clone git@github.com:martin-slater/tycho-ipl.git
-cd tycho-ipl
-git submodule update # this may take some time
 mkdir build
 cd build
 cmake ../
