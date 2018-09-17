@@ -1,5 +1,7 @@
 # Tycho Image Processing Library
 
+[![Build status](https://ci.appveyor.com/api/projects/status/uahn2kjqc4xcbbri?svg=true)](https://ci.appveyor.com/project/MartinSlater/tycho-ipl)
+
 This is a testbed for comparing and investigating difference image processsing algorithms. It is built on top of [OpenCV](https://opencv.org) and provides a simple scripting language to allow composition of different effects to produce complex results. It also has functionality to explore the parameter space of different algorithms to help get a better understanding of how the effect a range of images. It is supplied as a core library and a driver program that can be used as is to test out different algorithms and compositions.  
 
 ## Supported Platforms
