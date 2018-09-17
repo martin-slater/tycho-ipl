@@ -216,7 +216,16 @@ namespace runtime
 			while (narg < args.size())
 			{
 				std::vector<std::string> globbed;
-				auto fullpath = utils::get_absolute_path(args[narg]);
+#ifdef _MSC_VER
+				// on windows convert any forward slashes to back slashes
+				auto path = args[narg];
+				for (char& ch : path)
+				{
+					if (ch == '/')
+						ch = '\\';
+				}
+#endif
+				auto fullpath = utils::get_absolute_path(path);
 				if (!utils::glob_expand(fullpath, globbed, case_sensitive_glob))
 				{
 					fprintf(stderr, "Failed to expand input '%s'\n", args[narg].c_str());

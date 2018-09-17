@@ -134,8 +134,8 @@ namespace utils
 		std::string dir, name, ext;
 		get_path_parts(path, dir, name, ext);
 		printf("path=%s\n", path.c_str());
-		dir = std_filesystem::canonical(std_filesystem::absolute(dir)).string();
-		return dir + "/" + name + ext;
+		auto res_path = std_filesystem::canonical(std_filesystem::absolute(dir));
+		return (res_path / (name + ext)).string();
 	}
 
 	//----------------------------------------------------------------------------

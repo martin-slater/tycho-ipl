@@ -34,12 +34,6 @@
 #include "../contact_sheet.h"
 #include "../functions/interface_functions.h"
 
-#ifdef _MSC_VER
-#include <filesystem>
-#else
-#include <experimental/filesystem>
-#endif 
-
 namespace std_filesystem = std::experimental::filesystem;
 
 //----------------------------------------------------------------------------
@@ -175,7 +169,7 @@ namespace runtime
 
 	//----------------------------------------------------------------------------
 
-	void experiment_runner::run(const std::string& out_dir, program* program,  image* source, int image_idx)
+	void experiment_runner::run(const std::experimental::filesystem::path& out_dir, program* program,  image* source, int image_idx)
 	{
 		// split source path into parts
 		std::string dir, name, ext;
@@ -237,7 +231,7 @@ namespace runtime
 	//----------------------------------------------------------------------------
 
 	void experiment_runner::process_outputs(image_result_list& outputs, 
-		const std::string& out_dir, const result_matrix::address& base_addr, 
+		const std::experimental::filesystem::path& out_dir, const result_matrix::address& base_addr,
 		const std::string& input_str, const std::string& base_name)
 	{
 		// write all output images to disk and add to result matrix
@@ -246,10 +240,10 @@ namespace runtime
 		{
 			std_filesystem::path dst_path(out_dir);
 			dst_path /= (base_name + image.Annotation + ".png");
-			image.Image->write_to_file(dst_path.c_str());
+			image.Image->write_to_file(dst_path.string());
 
 			std::shared_ptr<file_list_node> file_list = std::make_shared<file_list_node>();
-			file_list->add_path(dst_path, input_str + image.Annotation);
+			file_list->add_path(dst_path.string(), input_str + image.Annotation);
 
 			// add to the output matrix
 			result_matrix::address node_addr(base_addr);

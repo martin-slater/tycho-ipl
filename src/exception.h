@@ -129,7 +129,6 @@ namespace image_processing
 				&buffer[0],
 				"Error loading program '%s'",
 				m_Path.c_str());
-			buffer.data();
 			return buffer.data();
 		}
 

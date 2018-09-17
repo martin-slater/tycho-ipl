@@ -37,6 +37,14 @@
 
 #include <vector>
 
+#ifdef _MSC_VER
+#include <filesystem>
+#else
+#include <experimental/filesystem>
+#endif 
+
+
+
 //----------------------------------------------------------------------------
 // Class
 //----------------------------------------------------------------------------
@@ -64,8 +72,8 @@ namespace runtime
 		
 	private:
 		void build_input_matrix(const session_options::input_map& raw_inputs);
-		void run(const std::string& out_dir, program* program, image* source, int image_idx);
-		void process_outputs(image_result_list& outputs, const std::string& out_dir, 
+		void run(const std::experimental::filesystem::path& out_dir, program* program, image* source, int image_idx);
+		void process_outputs(image_result_list& outputs, const std::experimental::filesystem::path& out_dir,
 			const result_matrix::address& base_addr, const std::string& input_str, 
 			const std::string& base_name);
 
