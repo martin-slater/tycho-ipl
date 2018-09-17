@@ -77,6 +77,6 @@ endif()
 set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/externals/opencv/" CACHE PATH "OpenCV include directory")
 
 add_subdirectory(3rdparty/libimagequant)
-add_subdirectory(src)
+add_subdirectory(tycho-ipl)
 add_subdirectory(driver)
 

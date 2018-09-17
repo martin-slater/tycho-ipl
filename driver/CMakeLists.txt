@@ -33,7 +33,7 @@ if(MSVC)
 endif()
 
 add_executable(${PROJECT_NAME} main.cpp)
-include_directories(../src/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 include_directories(${OPENCV_INCLUDE_DIRS})
 MESSAGE(STATUS ${OPENCV_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} tycho_ipl)

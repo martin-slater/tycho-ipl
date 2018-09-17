@@ -26,10 +26,10 @@
 
 #include <stdio.h>
 
-#include "runtime/session_options.h"
-#include "runtime/output_interface.h"
-#include "runtime/simple_runner.h"
-#include "runtime/experiment_runner.h"
+#include "tycho-ipl/runtime/session_options.h"
+#include "tycho-ipl/runtime/output_interface.h"
+#include "tycho-ipl/runtime/simple_runner.h"
+#include "tycho-ipl/runtime/experiment_runner.h"
 
 #if defined(_DEBUG) && defined(_WIN32)
 #define _CRTDBG_MAP_ALLOC
