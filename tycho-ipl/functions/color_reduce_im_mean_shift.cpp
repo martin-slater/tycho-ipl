@@ -74,7 +74,7 @@ namespace functions
 
 	//----------------------------------------------------------------------------
 
-	bool color_reduce_im_mean_shift::dispatch(context * ctx, const kv_dict & inputs, kv_dict & outputs)
+	bool color_reduce_im_mean_shift::dispatch(context * /*ctx*/, const kv_dict & inputs, kv_dict & outputs)
 	{
 		image* src = inputs.get_image("src");
 		int kernel_size = inputs.get_integer("kernel_size");

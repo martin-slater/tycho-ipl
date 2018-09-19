@@ -69,7 +69,7 @@ namespace functions
 
 	//----------------------------------------------------------------------------
 
-	bool color_reduce_im_quantize::dispatch(context * ctx, const kv_dict & inputs, kv_dict & outputs)
+	bool color_reduce_im_quantize::dispatch(context * /*ctx*/, const kv_dict & inputs, kv_dict & outputs)
 	{
 		image* src = inputs.get_image("src");
 		int num_colors = inputs.get_integer("num_colors");

@@ -55,7 +55,6 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	static const std::vector<param_desc> BinaryFuncInputs = {
-		function::DefaultInput(),
 		param_desc(ObjectType::Image, "src1", "First source image", value()),
 		param_desc(ObjectType::Image, "src2", "Second source image", value())
 	};
@@ -84,7 +83,6 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	static const std::vector<param_desc> ScaledBinaryFuncInputs = {
-		function::DefaultInput(),
 		param_desc(ObjectType::Image, "src1", "First source image", value()),
 		param_desc(ObjectType::Image, "src2", "Second source image", value()),
 		param_desc(ObjectType::Float, "scale", "Scale factor applied to src1", value::make_float(1))
