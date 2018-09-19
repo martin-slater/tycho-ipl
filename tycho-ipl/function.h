@@ -189,6 +189,7 @@ namespace image_processing
 		bool get_param(const std::string& key, param_desc&);
 
 		std::string get_signature() const;
+		std::string get_simple_signature() const;
 		const char* get_name() const { return m_Name; }
 		const char* get_description() const { return m_Desc; }
 

@@ -85,6 +85,10 @@ int main(int argc, char* argv[])
 			options.print_function_list(output);
 			result = EXIT_SUCCESS;
 		}
+		else if (options.RunAction == session_options::action::GenerateSphinxDocs)
+		{
+			options.output_sphinx_function_docs(options.SphinxOutputDir);
+		}
 		else
 		{
 			try

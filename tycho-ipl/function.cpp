@@ -91,6 +91,29 @@ namespace image_processing
 		return result;
 	}
 
+
+	//----------------------------------------------------------------------------
+
+	std::string function::get_simple_signature() const
+	{
+		std::string result(m_Name);
+
+		result += "(";
+		auto inputs = get_inputs();
+		auto outputs = get_outputs();
+		bool first = true;
+		for (auto p : inputs)
+		{
+			if (!first)
+				result += ", ";
+			result += p.Name;
+			first = false;
+		}
+		result += ")";
+
+		return result;
+	}
+
 	//----------------------------------------------------------------------------
 
 	bool function::has_input(const char *name) const

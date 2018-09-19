@@ -46,7 +46,7 @@
 //----------------------------------------------------------------------------
 
 namespace tycho
-{   
+{
 namespace image_processing
 {
 namespace runtime
@@ -107,6 +107,7 @@ namespace runtime
 			ShowHelp,
 			ShowFunctions,
 			DumpFunctionTableMarkdown,
+			GenerateSphinxDocs,
 			Run,
 			RunExperiment
 		};
@@ -122,10 +123,22 @@ namespace runtime
 		void print_function_list(output_interface& output) const;
 		void print_function_list_markdown(output_interface& output) const;
 
+		/**
+		 * @brief Generate sphinx document tree for all functions
+		 *
+		 * This generates a .rst for each function with its description
+		 * and function parameters.
+		 *
+		 * @warning This will overwrite any existing files in the directory.
+		 * @param output_dir Directory to output the documentation to.
+		 */
+		int output_sphinx_function_docs(const std::string& output_dir) const;
+
 		bool		MakeContactSheet = false;
 		bool		LaunchResult = false;
 		file_list    InputFiles;
 		std::string PrefilterProgram;
+		std::string SphinxOutputDir;
 		std::string Program;
 		input_map    ProgramInputs;
 		std::string OutputDir;

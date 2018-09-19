@@ -31,14 +31,16 @@
 #include "output_interface.h"
 #include "../utils.h"
 
-#ifdef _WIN32
-#define WINDOWS_LEAN_AND_MEAN
-#define NOMINMAX
-#include <windows.h>
-#endif
-
 #include <algorithm>
 #include <regex>
+
+#ifdef _MSC_VER
+#include <filesystem>
+#else
+#include <experimental/filesystem>
+#endif 
+
+namespace std_filesystem = std::experimental::filesystem;
 
 //----------------------------------------------------------------------------
 // Class
@@ -176,6 +178,13 @@ namespace runtime
 			else if (key == "help")
 			{
 				RunAction = action::ShowHelp;
+			}
+			else if (key == "sphinx")
+			{
+				RunAction = action::GenerateSphinxDocs;
+				if (!has_val)
+					throw invalid_parameter("--sphinx: No output directory specified");
+				SphinxOutputDir = val;
 			}
 			else if (key == "experiment")
 			{
@@ -344,6 +353,73 @@ namespace runtime
 
 		functions::factory factory;
 		factory.enumerate(std::bind(fp, std::placeholders::_1));
+	}
+
+	//----------------------------------------------------------------------------
+
+	int session_options::output_sphinx_function_docs(const std::string& output_dir) const
+	{
+		namespace fs = std::experimental::filesystem;
+
+		if (!fs::exists(output_dir))
+		{
+			fprintf(stderr, "Output directory does not exists : '%s'\n", output_dir.c_str());
+			return EXIT_FAILURE;
+		}
+
+		auto pp = [](FILE* file, const char* title, const param_list& params)
+		{
+			if (params.size())
+			{
+				fprintf(file, "**%s**\n\n", title);
+				fprintf(file, ".. csv-table::\n");
+				fprintf(file, "\t:header: \"name\", \"type\", \"default\", \"description\"\n");
+				fprintf(file, "\t:widths: 20,10,10,60\n");
+				fprintf(file, "\n");
+
+				for (auto p : params)
+					// name, type, default, description
+					fprintf(file, "\t\"**%s**\", \"*%s*\", \"%s\", \"%s\"\n", 
+						p.Name.c_str(), 
+						to_string(p.Type),
+						p.DefaultVal.to_string().c_str(),
+						p.Description.c_str());
+
+				fprintf(file, "\n");
+			}
+		};
+
+		auto fp = [&output_dir, pp](function* func) {
+			std::string fname = func->get_name();
+			fs::path output_path(output_dir);
+			output_path /= (fname + ".rst");
+			FILE* file = fopen(output_path.string().c_str(), "w+");
+			auto sig = func->get_simple_signature();
+			fprintf(file, "%s\n", sig.c_str());
+			
+			// title underlining must be at least the same length as the title otherwise
+			// a warning will be generated
+			fprintf(file, "%s\n\n", std::string(sig.length(), '=').c_str());
+
+			fprintf(file, "%s\n\n", func->get_description());
+			pp(file, "Inputs", func->get_inputs());
+			pp(file, "Outputs", func->get_outputs());
+
+			fs::path image_path(output_dir);
+			image_path /= "images";
+			image_path /= (fname + ".jpg");
+			if (fs::exists(image_path))
+			{ 
+				fprintf(file, ".. image:: images/%s.jpg\n", fname.c_str());
+			}
+
+			fclose(file);
+		};
+
+		functions::factory factory;
+		factory.enumerate(std::bind(fp, std::placeholders::_1));
+
+		return EXIT_SUCCESS;
 	}
 
 	//----------------------------------------------------------------------------

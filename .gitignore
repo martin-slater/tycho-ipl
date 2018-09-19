@@ -11,6 +11,9 @@ Temp/
 *.sdf
 *.opensdf
 build/
+docs/_build/
+
+
 
 
 
