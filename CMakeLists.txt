@@ -62,6 +62,23 @@ set(OPENCV_INCLUDE_DIRS
     ${OpenCV_DIR}/modules/photo/include
     ${CMAKE_SOURCE_DIR}/build)
 
+# Configure ImageMagick
+set(HAVE_IMAGE_MAGICK 0)
+if(MSVC)
+  set(HAVE_IMAGE_MAGICK 1)
+  set(IMAGE_MAGICK_DIR "${CMAKE_SOURCE_DIR}/3rdParty/Magick/")
+  set(IMAGE_MAGICK_INCLUDE_DIR "${IMAGE_MAGICK_DIR}include")
+  set(IMAGE_MAGICK_LIB_DIR "${IMAGE_MAGICK_DIR}lib")
+  set(IMAGE_MAGICK_LIBS
+    "${IMAGE_MAGICK_LIB_DIR}/CORE_RL_Magick++_.lib"
+    "${IMAGE_MAGICK_LIB_DIR}/CORE_RL_MagickCore_.lib"
+    "${IMAGE_MAGICK_LIB_DIR}/CORE_RL_MagickWand_.lib"
+  )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAVE_IMAGE_MAGICK")
+endif()
+
+MESSAGE(STATUS "HAVE_IMAGE_MAGICK : ${HAVE_IMAGE_MAGICK}")
+
 # Setup compiler warning level
 if(MSVC)
   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")

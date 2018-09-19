@@ -1,5 +1,5 @@
 /*
-  Copyright 1999-2015 ImageMagick Studio LLC, a non-profit organization
+  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organization
   dedicated to making software imaging solutions freely available.
   
   You may not use this file except in compliance with the License.
@@ -29,19 +29,19 @@ extern "C" {
   Define declarations.
 */
 #define MagickPackageName "ImageMagick"
-#define MagickCopyright  "Copyright (C) 1999-2015 ImageMagick Studio LLC"
-#define MagickLibVersion  0x702
-#define MagickLibVersionText  "7.0.2"
-#define MagickLibVersionNumber  7,0,2,5
-#define MagickLibAddendum  "-5"
-#define MagickLibInterface  7
-#define MagickLibMinInterface  7
+#define MagickCopyright  "Copyright (C) 1999-2018 ImageMagick Studio LLC"
+#define MagickLibVersion  0x708
+#define MagickLibVersionText  "7.0.8"
+#define MagickLibVersionNumber  7,0,8,11
+#define MagickLibAddendum  "-11"
+#define MagickLibInterface  6
+#define MagickLibMinInterface  0
 #if defined(_WIN64)
 #  define MagickPlatform "x64"
 #else
 #  define MagickPlatform "x86"
 #endif
-#define MagickReleaseDate  "2016-07-22"
+#define MagickReleaseDate  "2018-08-29"
 #define MagickAuthoritativeLicense  \
   "http://www.imagemagick.org/script/license.php"
 #define MagickAuthoritativeURL  "http://www.imagemagick.org"

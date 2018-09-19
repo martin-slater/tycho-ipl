@@ -35,9 +35,16 @@ endif()
 add_executable(${PROJECT_NAME} main.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 include_directories(${OPENCV_INCLUDE_DIRS})
-MESSAGE(STATUS ${OPENCV_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} tycho_ipl)
 target_link_libraries(${PROJECT_NAME} libimagequant)
+
+if(HAVE_IMAGE_MAGICK)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/../3rdparty/Magick/dll/"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+endif()
+
 
 # OS X xcode clang does not support std::filesystem yet so we need to use
 # homebrew installed version and as this library is still not official we
@@ -47,3 +54,4 @@ if(APPLE)
         target_link_libraries(${PROJECT_NAME} /usr/local/opt/llvm/lib/libc++experimental.a)
     endif()
 endif()
+

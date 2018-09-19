@@ -1,11 +1,11 @@
 /*
-  Copyright 1999-2016 ImageMagick Studio LLC, a non-profit organization
+  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organization
   dedicated to making software imaging solutions freely available.
   
   You may not use this file except in compliance with the License.
   obtain a copy of the License at
   
-    http://www.imagemagick.org/script/license.php
+    https://www.imagemagick.org/script/license.php
   
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,6 @@
 #ifndef MAGICKCORE_BLOB_H
 #define MAGICKCORE_BLOB_H
 
-#include "MagickCore/image.h"
-#include "MagickCore/stream.h"
-
 #if defined(__cplusplus) || defined(c_plusplus)
 extern "C" {
 #endif
@@ -31,15 +28,36 @@ typedef enum
 {
   ReadMode,
   WriteMode,
-  IOMode
+  IOMode,
+  PersistMode
 } MapMode;
+
+typedef ssize_t
+  (*CustomStreamHandler)(unsigned char *,const size_t,void *);
+
+typedef MagickOffsetType
+  (*CustomStreamSeeker)(const MagickOffsetType,const int,void *);
+
+typedef MagickOffsetType
+  (*CustomStreamTeller)(void *);
+
+typedef struct _CustomStreamInfo
+  CustomStreamInfo;
+
+#include "MagickCore/image.h"
+#include "MagickCore/stream.h"
+
+extern MagickExport CustomStreamInfo
+  *AcquireCustomStreamInfo(ExceptionInfo *),
+  *DestroyCustomStreamInfo(CustomStreamInfo *);
 
 extern MagickExport FILE
   *GetBlobFileHandle(const Image *);
 
 extern MagickExport Image
   *BlobToImage(const ImageInfo *,const void *,const size_t,ExceptionInfo *),
-  *PingBlob(const ImageInfo *,const void *,const size_t,ExceptionInfo *);
+  *PingBlob(const ImageInfo *,const void *,const size_t,ExceptionInfo *),
+  *CustomStreamToImage(const ImageInfo *,ExceptionInfo *);
 
 extern MagickExport MagickBooleanType
   BlobToFile(char *,const void *,const size_t,ExceptionInfo *),
@@ -64,8 +82,15 @@ extern MagickExport void
   DuplicateBlob(Image *,const Image *),
   *FileToBlob(const char *,const size_t,size_t *,ExceptionInfo *),
   *ImageToBlob(const ImageInfo *,Image *,size_t *,ExceptionInfo *),
+  ImageToCustomStream(const ImageInfo *,Image *,ExceptionInfo *),
   *ImagesToBlob(const ImageInfo *,Image *,size_t *,ExceptionInfo *),
-  SetBlobExempt(Image *,const MagickBooleanType);
+  ImagesToCustomStream(const ImageInfo *,Image *,ExceptionInfo *),
+  SetBlobExempt(Image *,const MagickBooleanType),
+  SetCustomStreamData(CustomStreamInfo *,void *),
+  SetCustomStreamReader(CustomStreamInfo *,CustomStreamHandler),
+  SetCustomStreamSeeker(CustomStreamInfo *,CustomStreamSeeker),
+  SetCustomStreamTeller(CustomStreamInfo *,CustomStreamTeller),
+  SetCustomStreamWriter(CustomStreamInfo *,CustomStreamHandler);
 
 #if defined(__cplusplus) || defined(c_plusplus)
 }

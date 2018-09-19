@@ -39,7 +39,17 @@
 
 #ifdef HAVE_IMAGE_MAGICK
 
+#define register // Invalid storage specifier in c++17
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4275)
+#endif  // _MSC_VER
+
 #include "Magick++.h"
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif  // _MSC_VER
 
 //----------------------------------------------------------------------------
 // Class

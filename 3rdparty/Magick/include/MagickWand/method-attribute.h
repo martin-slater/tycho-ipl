@@ -1,11 +1,11 @@
 /*
-  Copyright 1999-2016 ImageMagick Studio LLC, a non-profit organization
+  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organization
   dedicated to making software imaging solutions freely available.
 
   You may not use this file except in compliance with the License.
   obtain a copy of the License at
 
-    http://www.imagemagick.org/script/license.php
+    https://www.imagemagick.org/script/license.php
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -103,14 +103,17 @@ extern "C" {
 #  define wand_aligned(x)  __attribute__((aligned(x)))
 #  define wand_attribute  __attribute__
 #  define wand_unused(x)  wand_unused_ ## x __attribute__((unused))
-#elif defined( __VMS )
-#  define wand_aligned(x)  /* nothing */
-#  define wand_attribute(x)  /* nothing */
-#  define wand_unused(x) x
-#else
+#  define wand_unreferenced(x)  /* nothing */
+#elif defined(MAGICKWAND_WINDOWS_SUPPORT) && !defined(__CYGWIN__)
 #  define wand_aligned(x)  __declspec(align(x))
 #  define wand_attribute(x)  /* nothing */
 #  define wand_unused(x) x
+#  define wand_unreferenced(x) (x)
+#else
+#  define wand_aligned(x)  /* nothing */
+#  define wand_attribute(x)  /* nothing */
+#  define wand_unused(x) x
+#  define wand_unreferenced(x)  /* nothing */
 #endif
 
 #if !defined(__clang__) && (((__GNUC__) > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3)))

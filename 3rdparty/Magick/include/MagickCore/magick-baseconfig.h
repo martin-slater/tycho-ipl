@@ -72,14 +72,24 @@
 #undef MAGICKCORE_HAVE_CL_CL_H
 
 /*
-    Exclude deprecated methods in MagickCore API
+  Exclude deprecated methods in MagickCore API
 */
 //#define MAGICKCORE_EXCLUDE_DEPRECATED
+
+/*
+  Define to only use the built-in (in-memory) settings.
+*/
+//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT
 
 /*
   Define to use the bzip2 compression library
 */
 #define MAGICKCORE_BZLIB_DELEGATE
+
+/*
+  Define to use the CAIRO library
+*/
+#define MAGICKCORE_CAIRO_DELEGATE
 
 /*
   Define to use the OpenEXR library
@@ -108,10 +118,24 @@
 #define MAGICKCORE_HAVE_LCMS2_H
 
 /*
+  Define to use the libheif library
+*/
+#define MAGICKCORE_HEIC_DELEGATE
+
+/*
+  Define to use the lzma compression library
+*/
+#define MAGICKCORE_LZMA_DELEGATE
+
+/*
+  Define to use the Raw library
+*/
+#define MAGICKCORE_RAW_R_DELEGATE
+
+/*
   Define to use the RSVG library
 */
 #define MAGICKCORE_RSVG_DELEGATE
-#define MAGICKCORE_CAIRO_DELEGATE
 
 /*
   Define to use the GNOME XML library
@@ -164,11 +188,6 @@
 #define MAGICKCORE_WINGDI32_DELEGATE
 
 /*
-  Define to only use the built-in (in-memory) settings.
-*/
-//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT
-
-/*
   Hard Coded Paths
 
   If hard-coded paths are defined via the the following define
@@ -219,7 +238,7 @@
   Required or InitializeCriticalSectionandSpinCount is undefined.
 */
 #if !defined(_WIN32_WINNT)
-#  define _WIN32_WINNT  0x0501
+#  define _WIN32_WINNT  0x0502
 #endif
 
 /*
@@ -241,18 +260,18 @@
 */
 #if !defined(double_t)
 #define MAGICKCORE_HAVE_DOUBLE_T
-#if !defined(__MINGW32__) && !defined(__MINGW64__)
+#if !defined(__MINGW32__)
 typedef double double_t;
 #endif
 #endif
 #if !defined(float_t)
 #define MAGICKCORE_HAVE_FLOAT_T
-#if !defined(__MINGW32__) && !defined(__MINGW64__)
+#if !defined(__MINGW32__)
 typedef float float_t;
 #endif
 #endif
-#if !defined(ssize_t) && !defined(__MINGW32__) && !defined(__MINGW64__)
-#if defined(_WIN64) 
+#if !defined(ssize_t) && !defined(__MINGW32__)
+#if defined(_WIN64)
 typedef __int64 ssize_t;
 #else
 typedef long ssize_t;
@@ -426,8 +445,10 @@ typedef long ssize_t;
   Disable specific warnings.
 */
 #ifdef _MSC_VER
+#if _MSC_VER < 1910
 #pragma warning(disable: 4054) /* 'conversion' : from function pointer 'type1' to data pointer 'type2' */
 #pragma warning(disable: 4055) /* 'conversion' : from data pointer 'type1' to function pointer 'type2' */
+#endif
 #pragma warning(disable: 4101) /* 'identifier' : unreferenced local variable */
 #pragma warning(disable: 4201) /* nonstandard extension used : nameless struct/union */
 #pragma warning(disable: 4130) /* 'operator' : logical operation on address of string constant */

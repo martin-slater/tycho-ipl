@@ -169,3 +169,11 @@ target_link_libraries(tycho_ipl
     opencv_highgui
     opencv_photo
     libimagequant)
+
+if(HAVE_IMAGE_MAGICK)
+    include_directories(${IMAGE_MAGICK_INCLUDE_DIR})
+    link_directories(${IMAGE_MAGICK_LIB_DIR})
+    target_link_libraries(${PROJECT_NAME}
+        ${IMAGE_MAGICK_LIBS}
+    )
+endif()

@@ -1,11 +1,11 @@
 /*
-  Copyright 1999-2016 ImageMagick Studio LLC, a non-profit organization
+  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organization
   dedicated to making software imaging solutions freely available.
   
   You may not use this file except in compliance with the License.
   obtain a copy of the License at
   
-    http://www.imagemagick.org/script/license.php
+    https://www.imagemagick.org/script/license.php
   
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -46,6 +46,9 @@ extern "C" {
 # if defined(__cplusplus) || defined(c_plusplus)
 #  undef inline
 # endif
+#endif
+#if __cplusplus > 199711L
+#define register
 #endif
 
 #define MAGICKCORE_CHECK_VERSION(major,minor,micro) \
@@ -147,8 +150,9 @@ extern "C" {
 #include "MagickCore/shear.h"
 #include "MagickCore/signature.h"
 #include "MagickCore/splay-tree.h"
-#include "MagickCore/stream.h"
+#include "MagickCore/static.h"
 #include "MagickCore/statistic.h"
+#include "MagickCore/stream.h"
 #include "MagickCore/string_.h"
 #include "MagickCore/timer.h"
 #include "MagickCore/token.h"

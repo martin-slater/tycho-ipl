@@ -1,11 +1,11 @@
 /*
-  Copyright 1999-2016 ImageMagick Studio LLC, a non-profit organization
+  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organization
   dedicated to making software imaging solutions freely available.
   
   You may not use this file except in compliance with the License.
   obtain a copy of the License at
   
-    http://www.imagemagick.org/script/license.php
+    https://www.imagemagick.org/script/license.php
   
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,9 @@ extern "C" {
 
 extern MagickExport MagickBooleanType
   InvokeStaticImageFilter(const char *,Image **,const int,const char **,
-    ExceptionInfo *);
+    ExceptionInfo *),
+  RegisterStaticModule(const char *,ExceptionInfo *exception),
+  UnregisterStaticModule(const char *);
 
 extern ModuleExport size_t
   RegisterAAIImage(void),
@@ -62,7 +64,6 @@ extern ModuleExport size_t
   RegisterEPTImage(void),
   RegisterEXRImage(void),
   RegisterFAXImage(void),
-  RegisterFDImage(void),
   RegisterFITSImage(void),
   RegisterFLIFImage(void),
   RegisterFPXImage(void),
@@ -74,6 +75,7 @@ extern ModuleExport size_t
   RegisterGRAYImage(void),
   RegisterHALDImage(void),
   RegisterHDRImage(void),
+  RegisterHEICImage(void),
   RegisterHImage(void),
   RegisterHISTOGRAMImage(void),
   RegisterHRZImage(void),
@@ -86,7 +88,6 @@ extern ModuleExport size_t
   RegisterJBGImage(void),
   RegisterJBIGImage(void),
   RegisterJNXImage(void),
-  RegisterJPGImage(void),
   RegisterJPEGImage(void),
   RegisterJSONImage(void),
   RegisterJP2Image(void),
@@ -123,6 +124,7 @@ extern ModuleExport size_t
   RegisterPDBImage(void),
   RegisterPDFImage(void),
   RegisterPESImage(void),
+  RegisterPGXImage(void),
   RegisterPICImage(void),
   RegisterPICTImage(void),
   RegisterPIXImage(void),
@@ -225,7 +227,6 @@ extern ModuleExport void
   UnregisterEPTImage(void),
   UnregisterEXRImage(void),
   UnregisterFAXImage(void),
-  UnregisterFDImage(void),
   UnregisterFITSImage(void),
   UnregisterFLIFImage(void),
   UnregisterFPXImage(void),
@@ -237,6 +238,7 @@ extern ModuleExport void
   UnregisterGRAYImage(void),
   UnregisterHALDImage(void),
   UnregisterHDRImage(void),
+  UnregisterHEICImage(void),
   UnregisterHImage(void),
   UnregisterHISTOGRAMImage(void),
   UnregisterHRZImage(void),
@@ -249,7 +251,6 @@ extern ModuleExport void
   UnregisterJBGImage(void),
   UnregisterJBIGImage(void),
   UnregisterJNXImage(void),
-  UnregisterJPGImage(void),
   UnregisterJPEGImage(void),
   UnregisterJP2Image(void),
   UnregisterJSONImage(void),
@@ -287,6 +288,7 @@ extern ModuleExport void
   UnregisterPDBImage(void),
   UnregisterPDFImage(void),
   UnregisterPESImage(void),
+  UnregisterPGXImage(void),
   UnregisterPICImage(void),
   UnregisterPICTImage(void),
   UnregisterPIXImage(void),
@@ -352,6 +354,10 @@ extern ModuleExport void
   UnregisterXWDImage(void),
   UnregisterYCBCRImage(void),
   UnregisterYUVImage(void);
+
+extern MagickExport void
+  RegisterStaticModules(void),
+  UnregisterStaticModules(void);
 
 #if defined(__cplusplus) || defined(c_plusplus)
 }
