@@ -224,6 +224,8 @@ namespace runtime
 					if (ch == '/')
 						ch = '\\';
 				}
+#else
+				auto path = args[narg];
 #endif
 				auto fullpath = utils::get_absolute_path(path);
 				if (!utils::glob_expand(fullpath, globbed, case_sensitive_glob))
