@@ -62,9 +62,7 @@ namespace functions
 		"kuwahara",
 		"Apply the kuwahara operator. This smooths textured regions whilst maintaining edges.",
 		Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 
@@ -93,7 +91,7 @@ namespace functions
 
 		const int kwidth = (kernel_size - 1) / 2;
 		const int num_bvals = (kwidth + 1) * (kwidth + 1);
-		int* bvals = (int*)alloca(sizeof(int) * num_bvals);
+		auto* bvals = (int*)alloca(sizeof(int) * num_bvals);
 
 		cv::Vec2i quads[] = {
 			cv::Vec2i(-kwidth, -kwidth),
@@ -116,10 +114,10 @@ namespace functions
 					float lowest_sd = std::numeric_limits<float>::max();
 
 					// kernel is split into four quadrants
-					for (int q = 0; q < 4; ++q)
+					for (auto & quad : quads)
 					{
-						const int sqx = x + quads[q][0];
-						const int sqy = y + quads[q][1];
+						const int sqx = x + quad[0];
+						const int sqy = y + quad[1];
 
 						const int eqx = sqx + kwidth + 1;
 						const int eqy = sqy + kwidth + 1;

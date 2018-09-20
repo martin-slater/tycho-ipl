@@ -56,8 +56,7 @@ namespace functions
 
 	rescale::rescale() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------

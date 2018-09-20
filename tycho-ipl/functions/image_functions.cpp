@@ -58,8 +58,7 @@ namespace functions
 		"load_image",
 		"Load an image to disk",
 		LoadInputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------
@@ -67,7 +66,7 @@ namespace functions
 	bool image_load::dispatch(context* /*ctx*/, const kv_dict& inputs, kv_dict& outputs)
 	{
 		std::string path = inputs.get_string("path");
-		image* dst = new image(path.c_str());
+		auto* dst = new image(path.c_str());
 		outputs.set_image("dst", dst);
 		return true;
 	}
@@ -88,8 +87,7 @@ namespace functions
 		"save_image",
 		"Write image to disk",
 		SaveInputs, function::NoOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------
@@ -119,8 +117,7 @@ namespace functions
 			"convert_image",
 			"Convert an image to a different format",
 			ConvertInputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------
@@ -164,8 +161,7 @@ namespace functions
 		"clamp_image_size",
 		"Clamp an image to a given size whilst maintaining its aspect ratio",
 		ClampSizeInputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------

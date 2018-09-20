@@ -53,8 +53,7 @@ namespace functions
 
 	denoise::denoise() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

@@ -57,9 +57,7 @@ namespace functions
 
 	visualize_palette::visualize_palette() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 
@@ -132,7 +130,7 @@ namespace functions
 			}
 		}
 		int total_width = txt_col_width + clr_col_width + padding * 2;
-		int min_dst_height = (int)(floor(num_colors / clr_step) * clr_col_height);
+		auto min_dst_height = (int)(floor(num_colors / clr_step) * clr_col_height);
 
 		// increase image size 
 		in_dst->resize(src_width + total_width, std::max(src_height, min_dst_height));

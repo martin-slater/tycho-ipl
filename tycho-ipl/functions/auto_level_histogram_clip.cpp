@@ -55,8 +55,7 @@ namespace functions
 
 	auto_level_histogram_clip::auto_level_histogram_clip() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------
@@ -104,7 +103,7 @@ namespace functions
 			const float* histRange = { range };
 			bool uniform = true;
 			bool accumulate = false;
-			calcHist(&gray, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange, uniform, accumulate);
+			calcHist(&gray, 1, nullptr, cv::Mat(), hist, 1, &histSize, &histRange, uniform, accumulate);
 
 			// calculate cumulative distribution from the histogram
 			std::vector<float> accumulator(histSize);

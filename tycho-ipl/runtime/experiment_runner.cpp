@@ -63,7 +63,7 @@ namespace runtime
 		std::vector<size_t> output_matrix_dims;
 		std::vector<std::string> output_dims_names;
 		output_matrix_dims.push_back(options.InputFiles.size());
-		output_dims_names.push_back("Images");
+		output_dims_names.emplace_back("Images");
 		for (auto input : m_InputMatrix)
 		{
 			output_matrix_dims.push_back(input.Values.size());

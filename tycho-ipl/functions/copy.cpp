@@ -54,8 +54,7 @@ namespace functions
 
 	copy::copy() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

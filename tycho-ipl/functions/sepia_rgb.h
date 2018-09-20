@@ -55,7 +55,7 @@ namespace functions
 	{
 	public:
 		sepia_rgb();
-		void execute(image* src, image* dst);
+		void execute(image* src, image* dst) override;
 	};
 
 	

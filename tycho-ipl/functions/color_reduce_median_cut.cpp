@@ -62,9 +62,7 @@ namespace functions
 
 	color_reduce_median_cut::color_reduce_median_cut() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 
@@ -96,7 +94,7 @@ namespace functions
 			}
 
 			Vec3b avg;
-			float scale = (float)(end - start);
+			auto scale = (float)(end - start);
 			avg[0] = saturate_cast<uchar>(sum[0] / scale);
 			avg[1] = saturate_cast<uchar>(sum[1] / scale);
 			avg[2] = saturate_cast<uchar>(sum[2] / scale);

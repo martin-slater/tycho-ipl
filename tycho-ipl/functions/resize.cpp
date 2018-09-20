@@ -55,8 +55,7 @@ namespace functions
 
 	resize::resize() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------

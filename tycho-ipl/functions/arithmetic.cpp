@@ -120,9 +120,9 @@ namespace functions
 			for (int x = 0; x < src->get_width(); ++x)
 			{
 				uchar max = 0;
-				for (size_t c = 0; c < channels.size(); ++c)
+				for (auto & channel : channels)
 				{
-					uchar val = channels[c].at<uchar>(y, x);
+					uchar val = channel.at<uchar>(y, x);
 					max = std::max(max, val);
 				}
 
@@ -145,9 +145,9 @@ namespace functions
 			for (int x = 0; x < src->get_width(); ++x)
 			{
 				uchar min = 255;
-				for (size_t c = 0; c < channels.size(); ++c)
+				for (auto & channel : channels)
 				{
-					uchar val = channels[c].at<uchar>(y, x);
+					uchar val = channel.at<uchar>(y, x);
 					min = std::min(min, val);
 				}
 

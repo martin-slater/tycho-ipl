@@ -51,7 +51,6 @@
 #include "remove_intensity.h"
 #include "interface_functions.h"
 #include "adaptive_edge_laplacian.h"
-#include "adaptive_edge_canny.h"
 #include "morphological.h"
 #include "oil_painting.h"
 #include "edge_sobel.h"

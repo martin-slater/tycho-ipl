@@ -61,9 +61,7 @@ namespace functions
 
 	color_reduce_lib_image_quant::color_reduce_lib_image_quant() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 	

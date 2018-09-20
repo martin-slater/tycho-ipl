@@ -57,7 +57,7 @@ namespace functions
 	{
 	public:
 		kuwahara();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		void execute(image* in_src, image* in_dst, int kernel_size);
 	};
 

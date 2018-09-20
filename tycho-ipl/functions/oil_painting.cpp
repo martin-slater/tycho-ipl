@@ -66,9 +66,7 @@ namespace functions
 		"oil_painting",
 		"Transform the image to have an oil painted appearance",
 		Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 
@@ -127,7 +125,7 @@ namespace functions
 							if (r2 < kwidth_sq)
 							{
 								cv::Vec3b pixel = src_mat.at<cv::Vec3b>(c, cr);
-								int bucket = (int)(((float)((pixel[0] + pixel[1] + pixel[2]) / 3.0f) / 255.0f) * (num_levels - 1));
+								auto bucket = (int)(((float)((pixel[0] + pixel[1] + pixel[2]) / 3.0f) / 255.0f) * (num_levels - 1));
 
 								IMAGE_PROC_ASSERT(bucket < num_levels);
 

@@ -157,7 +157,7 @@ namespace image_processing
 			Value(val)
 		{}
 
-		key_value() {}
+		key_value() = default;
 
 		std::string Key;
 		std::string Value;

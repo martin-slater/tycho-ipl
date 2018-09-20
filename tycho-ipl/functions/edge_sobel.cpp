@@ -75,8 +75,7 @@ namespace functions
 
 	edge_sobel::edge_sobel() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

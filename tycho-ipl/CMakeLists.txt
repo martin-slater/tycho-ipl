@@ -70,8 +70,6 @@ set( RUNTIME_SRCS
 source_group( "runtime" FILES ${RUNTIME_SRCS} )
 
 set( FUNCTION_SRCS
-    functions/adaptive_edge_canny.cpp
-    functions/adaptive_edge_canny.h
     functions/adaptive_edge_laplacian.cpp
     functions/adaptive_edge_laplacian.h
     functions/arithmetic.cpp

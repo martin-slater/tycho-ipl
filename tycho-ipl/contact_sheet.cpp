@@ -42,13 +42,6 @@ namespace image_processing
 
 	//----------------------------------------------------------------------------
 
-	contact_sheet::contact_sheet()
-	{
-
-	}
-
-	//----------------------------------------------------------------------------
-
 	void contact_sheet::auto_build(
 		const std::string& /*title*/, 
 		const result_matrix& results,

@@ -53,7 +53,7 @@ namespace functions
 	{
 	public:
 		image_load();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 
 	};
 
@@ -62,7 +62,7 @@ namespace functions
 	{
 	public:
 		image_save();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 	};
 
 	
@@ -71,7 +71,7 @@ namespace functions
 	{
 	public:
 		image_convert();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		void execute(image* in_src, image* in_dst, image::Format format);
 	};
 
@@ -83,7 +83,7 @@ namespace functions
 	{
 	public:
 		image_clamp_size();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		void execute(image* in_src, image* in_dst, int size, bool enlarge);
 	};
 

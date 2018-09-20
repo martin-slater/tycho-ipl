@@ -108,7 +108,7 @@ namespace image_processing
 
 	struct param_desc
 	{
-		param_desc() {}
+		param_desc() = default;
 
 		param_desc(
 			ObjectType type, 

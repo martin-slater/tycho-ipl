@@ -78,7 +78,7 @@ namespace utils
 
 	std::string timer::elapsed_str_ms() const
 	{
-		int elapsedMS = static_cast<int>(elapsed() * 1000);
+		auto elapsedMS = static_cast<int>(elapsed() * 1000);
 		char buf[128];
 		sprintf(buf, "%d", elapsedMS);
 		return buf;
@@ -166,7 +166,7 @@ namespace utils
 
 	std::string get_datetime_now_string()
 	{
-		time_t     now = time(0);
+		time_t     now = time(nullptr);
 		tm*  tstruct;
 		char       buf[80];
 		tstruct = localtime(&now);

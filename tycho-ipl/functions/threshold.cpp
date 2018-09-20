@@ -66,8 +66,7 @@ namespace functions
 
 	threshold::threshold() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), Constants)
-	{
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

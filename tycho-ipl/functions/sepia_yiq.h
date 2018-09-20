@@ -55,7 +55,7 @@ namespace functions
 	{
 	public:
 		sepia_yiq();
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		void execute(image* src, image* dst, int offset);
 	};
 

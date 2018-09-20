@@ -61,9 +61,7 @@ namespace functions
 
 	color_reduce_population::color_reduce_population() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

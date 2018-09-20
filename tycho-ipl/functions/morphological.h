@@ -55,7 +55,7 @@ namespace functions
 	{
 	public:
 		morphological_function(const char* name, const char* desc);
-		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs);
+		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		virtual void execute(image* in_src, image* in_dst, int elem, int size) = 0;
 	};
 

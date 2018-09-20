@@ -57,8 +57,7 @@ namespace functions
 
 	gaussian_blur::gaussian_blur() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 
 	//----------------------------------------------------------------------------

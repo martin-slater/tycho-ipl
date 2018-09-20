@@ -80,12 +80,6 @@ namespace image_processing
 
 	//----------------------------------------------------------------------------
 
-	image::image() :
-		m_CVMat(nullptr)
-	{}
-
-	//----------------------------------------------------------------------------
-
 	image::~image()
 	{
 		IMAGE_PROC_SAFE_DELETE(m_CVMat);
@@ -95,7 +89,7 @@ namespace image_processing
 
 	image* image::clone() const
 	{
-		image *c = new image();
+		auto *c = new image();
 		c->m_CVMat = new cv::Mat(get_opencv()->clone());
 		c->m_Format = m_Format;
 		c->m_SourcePath = m_SourcePath;

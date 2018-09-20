@@ -79,9 +79,7 @@ namespace functions
 
 	color_reduce_kmeans_cluster::color_reduce_kmeans_cluster() : 
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list()) 
-	{
-
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

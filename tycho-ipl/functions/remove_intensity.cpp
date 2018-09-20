@@ -65,9 +65,7 @@ namespace functions
 		"R' = R / sum, G' = G / sum, B' = B / sum. If sum is less than black-cutoff " \
 		"then it is clamped to zero.",
 		Inputs, function::DefaultOutputs(), declaration_list())
-	{
-		
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 

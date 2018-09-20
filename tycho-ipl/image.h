@@ -125,7 +125,7 @@ namespace image_processing
 		image(const std::string&);
 
 		/// Default constructor
-		image();
+		image() = default;
 
 		/// Destructor
 		virtual ~image();
@@ -208,7 +208,7 @@ namespace image_processing
 		size_t get_detailed_palette_information(detailed_palette& out_pal);
 
 	private:
-		cv::Mat* m_CVMat;
+		cv::Mat* m_CVMat{nullptr};
 		Format   m_Format;
 		std::string m_SourcePath;
 

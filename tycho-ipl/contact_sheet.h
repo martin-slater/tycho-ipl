@@ -64,7 +64,7 @@ namespace image_processing
 
 	public:
 		/// Default constructor
-		contact_sheet(); 		
+		contact_sheet() = default; 		
 
 		/// Automatically construct the contact sheets from the given results
 		/// matrix.

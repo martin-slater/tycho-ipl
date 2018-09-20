@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 		std_output_interface output;
 		std::vector<std::string> args;
 		for (int i = 1; i < argc; ++i)
-			args.push_back(argv[i]);
+			args.emplace_back(argv[i]);
 
 		session_options options(args);
 

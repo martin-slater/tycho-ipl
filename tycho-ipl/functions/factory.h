@@ -81,13 +81,13 @@ namespace functions
 
 		template<class T> void add_func()
 		{
-			T* t = new T();
+			auto* t = new T();
 			m_functions.insert(std::make_pair(t->get_name(), t));
 		}
 
 		template<class T> void add_func(const char* name)
 		{
-			T* t = new T();
+			auto* t = new T();
 			m_functions.insert(std::make_pair(name, t));
 		}
 	};

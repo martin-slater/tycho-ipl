@@ -79,8 +79,7 @@ namespace functions
 
 	adaptive_edge_laplacian::adaptive_edge_laplacian() :
 		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
-	{
-	}
+	{}
 
 	//----------------------------------------------------------------------------
 
@@ -147,15 +146,14 @@ namespace functions
 		image_ptr temp(new image(image::Format::Grey, in_dst->get_width(), in_dst->get_height()));
 		image_ptr best = nullptr;
 		float best_pc = FLT_MAX;
-		const float image_area = float(in_src->get_height() * in_src->get_width());
+		const auto image_area = float(in_src->get_height() * in_src->get_width());
 
 		// test different kernel sizes and get as close as we can to the target 
 		// percentage
  		const int strengths[] = { 3, 5, 7, 9 };
-		for (int i = 0; i < sizeof(strengths) / sizeof(int); ++i)
+		for (int strength : strengths)
 		{
-			const int strength = strengths[i];
-			filter.execute(in_src, temp.get(), strength, false);
+				filter.execute(in_src, temp.get(), strength, false);
 
 			image_ptr gray(new image());
 			temp->convert_to(gray.get(), image::Format::Grey);
