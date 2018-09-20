@@ -28,11 +28,12 @@ install:
 
 # skip unsupported combinations
 init:
-- set arch=
-- if "%arch%"=="Win64" (set arch=Win64)
-- echo %arch%
+- set cmake_arch=
+- if "%arch%"=="Win64" (set cmake_arch= Win64)
+- if "%arch%"=="Win32" (set cmake_arch=)
+- echo %cmake_arch%
 - echo %APPVEYOR_BUILD_WORKER_IMAGE%
-- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%cmake_arch%" )
 - echo %generator%
 
 before_build:
