@@ -373,13 +373,13 @@ namespace runtime
 			{
 				fprintf(file, "**%s**\n\n", title);
 				fprintf(file, ".. csv-table::\n");
-				fprintf(file, "\t:header: \"name\", \"type\", \"default\", \"description\"\n");
-				fprintf(file, "\t:widths: 20,10,10,60\n");
+				fprintf(file, "   :header: \"name\", \"type\", \"default\", \"description\"\n");
+				fprintf(file, "   :widths: 20,10,10,60\n");
 				fprintf(file, "\n");
 
 				for (auto p : params)
 					// name, type, default, description
-					fprintf(file, "\t\"**%s**\", \"*%s*\", \"%s\", \"%s\"\n", 
+					fprintf(file, "   \"**%s**\", \"*%s*\", \"%s\", \"%s\"\n", 
 						p.Name.c_str(), 
 						to_string(p.Type),
 						p.DefaultVal.to_string().c_str(),
@@ -393,7 +393,7 @@ namespace runtime
 			std::string fname = func->get_name();
 			fs::path output_path(output_dir);
 			output_path /= (fname + ".rst");
-			FILE* file = fopen(output_path.string().c_str(), "w+");
+			FILE* file = fopen(output_path.string().c_str(), "w+b");
 			auto sig = func->get_simple_signature();
 			fprintf(file, "%s\n", sig.c_str());
 			
