@@ -6,16 +6,16 @@ Sepia tone effect calculated in RGB space. Results in a less brown image than se
 **Inputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**src**", "*image*", "", "Source image"
+   "**src**", "*image*", "", "Source image"
 
 **Outputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**dst**", "*image*", "", "Destination image"
+   "**dst**", "*image*", "", "Destination image"
 

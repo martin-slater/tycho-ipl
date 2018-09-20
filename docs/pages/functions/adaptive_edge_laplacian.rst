@@ -6,20 +6,20 @@ Find edges using a Laplacian filter. This will search the filter space for the r
 **Inputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**src**", "*image*", "", "Source image"
-	"**edge_percent**", "*int*", "5", "Percentage of edge pixels to target"
-	"**min**", "*int*", "64", "Minimum value to be classified as an edge pixels. Pixels >= than this will be forced to 255"
-	"**invert**", "*bool*", "false", "Invert the results"
-	"**adaptive_cutoff**", "*bool*", "false", "Refine the best image found searching the filter space by changing the cutoff value"
+   "**src**", "*image*", "", "Source image"
+   "**edge_percent**", "*int*", "5", "Percentage of edge pixels to target"
+   "**min**", "*int*", "64", "Minimum value to be classified as an edge pixels. Pixels >= than this will be forced to 255"
+   "**invert**", "*bool*", "false", "Invert the results"
+   "**adaptive_cutoff**", "*bool*", "false", "Refine the best image found searching the filter space by changing the cutoff value"
 
 **Outputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**dst**", "*image*", "", "Destination image"
+   "**dst**", "*image*", "", "Destination image"
 

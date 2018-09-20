@@ -6,17 +6,17 @@ Remove noise from the passed image.
 **Inputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**src**", "*image*", "", "Source image"
-	"**strength**", "*float*", "3.000", "higher removes more noise but will remove more features"
+   "**src**", "*image*", "", "Source image"
+   "**strength**", "*float*", "3.000", "higher removes more noise but will remove more features"
 
 **Outputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**dst**", "*image*", "", "Destination image"
+   "**dst**", "*image*", "", "Destination image"
 

@@ -6,17 +6,17 @@ Removes the intensity from the image. If the image is in a colour space that con
 **Inputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**src**", "*image*", "", "Source image"
-	"**black-cutoff**", "*int*", "64", "Value under which the sum (A + G + B) will be clamped to 0"
+   "**src**", "*image*", "", "Source image"
+   "**black-cutoff**", "*int*", "64", "Value under which the sum (A + G + B) will be clamped to 0"
 
 **Outputs**
 
 .. csv-table::
-	:header: "name", "type", "default", "description"
-	:widths: 20,10,10,60
+   :header: "name", "type", "default", "description"
+   :widths: 20,10,10,60
 
-	"**dst**", "*image*", "", "Destination image"
+   "**dst**", "*image*", "", "Destination image"
 
