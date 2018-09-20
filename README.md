@@ -1,8 +1,10 @@
 # Tycho Image Processing Library
 
-[![Build status](https://ci.appveyor.com/api/projects/status/uahn2kjqc4xcbbri?svg=true)](https://ci.appveyor.com/project/MartinSlater/tycho-ipl)
+[![Build status](https://ci.appveyor.com/api/projects/status/uahn2kjqc4xcbbri?svg=true)](https://ci.appveyor.com/project/MartinSlater/tycho-ipl) ![Doc status](https://readthedocs.org/projects/tycho-ipl/badge/)
 
-This is a testbed for comparing and investigating difference image processsing algorithms. It is built on top of [OpenCV](https://opencv.org) and provides a simple scripting language to allow composition of different effects to produce complex results. It also has functionality to explore the parameter space of different algorithms to help get a better understanding of how the effect a range of images. It is supplied as a core library and a driver program that can be used as is to test out different algorithms and compositions.  
+This is a testbed for comparing and investigating difference image processsing algorithms. It is built on top of [OpenCV](https://opencv.org) and provides a simple scripting language to allow composition of different effects to produce complex results. It also has functionality to explore the parameter space of different algorithms to help get a better understanding of how the effect a range of images. It is supplied as a core library and a driver program that can be used as is to test out different algorithms and compositions.
+
+More detailed documentation is available [here](https://tycho-ipl.readthedocs.io/en/latest)
 
 ## Supported Platforms
 
@@ -16,7 +18,7 @@ brew install --with-clang llvm
 
 OpenCV is referenced as a submodule so you need to clone with
 
-```
+```bash
 git clone git@github.com:martin-slater/tycho-ipl.git --recursive
 ```
 
