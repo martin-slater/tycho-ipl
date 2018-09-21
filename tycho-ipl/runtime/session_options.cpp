@@ -405,6 +405,25 @@ namespace runtime
 			pp(file, "Inputs", func->get_inputs());
 			pp(file, "Outputs", func->get_outputs());
 
+			auto& constants = func->get_constants();
+			if (constants.size())
+			{
+				fprintf(file, "**%s**\n\n", "Constants");
+				fprintf(file, ".. csv-table::\n");
+				fprintf(file, "   :header: \"name\", \"type\", \"value\"\n");
+				fprintf(file, "   :widths: 20,10,70\n");
+				fprintf(file, "\n");
+
+				for (auto p : constants)
+					// name, type, default, description
+					fprintf(file, "   \"**%s**\", \"*%s*\", \"%s\"\n",
+						p.Name.c_str(),
+						to_string(p.Type),
+						p.Value.to_string().c_str());
+
+				fprintf(file, "\n");
+			}
+
 			fs::path image_path(output_dir);
 			image_path /= "images";
 			image_path /= (fname + ".jpg");

@@ -22,3 +22,15 @@ Remove noise from the passed image.
 
    "**dst**", "*image*", "", "Destination image"
 
+**Constants**
+
+.. csv-table::
+   :header: "name", "type", "value"
+   :widths: 20,10,70
+
+   "**THRESH_BINARY**", "*int*", "0"
+   "**THRESH_BINARY_INV**", "*int*", "1"
+   "**THRESH_TRUNC**", "*int*", "2"
+   "**THRESH_TOZERO**", "*int*", "3"
+   "**THRESH_TOZERO_INV**", "*int*", "4"
+
