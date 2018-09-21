@@ -6,17 +6,29 @@
 Welcome to TPL's documentation!
 =====================================
 
+The Tycho Image Processing Library gives a common interface to work with a
+range of image processing algorithms. It provides a simple script interface to
+allow composition of algorithms and functionality to compare and contrast
+competing algorithms as well as study their parameter spaces. This is motivated
+by the complexity of evaluating sometimes complex sets of control parameters
+that are not initially intuative in their use and to reduce the time to
+evaluate different algorithms across a wide range of test data.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    pages/overview
    pages/scripting
+   pages/driver
    pages/functions
    pages/license
 
 ==================
 
 * :ref:`genindex`
+* :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
