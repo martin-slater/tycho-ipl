@@ -63,7 +63,7 @@ namespace runtime
 			if (image)
 			{
 				image_result_list outputs;
-				runner::run(program, image.get(), kv_dict(), outputs);
+				runner::run(program, image.get(), kv_dict() /* m_Options.ProgramInputs*/, outputs);
 
 				// write the outputs to disk
 				std::string dir, name, ext;

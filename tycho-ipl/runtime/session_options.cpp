@@ -287,23 +287,25 @@ namespace runtime
 	{
 		output.error(
 			"Driver program to run Tycho IPL scripts on a set of images for a given range of parameters.\n"
-			"You can supply filter script input parameters on the command line as a comma separated list\n"
+			"You can supply script input parameters on the command line as a comma separated list\n"
 			"and it will run the script repeatedly for each of the parameters.\n"
 			"You can also specify a response file using @<filename> as a single command line parameters and\n"
 			"it will read the command line options from there instead\n"
 			"\n"
 			"Usage : \n"
-			"    filter.exe --help             : Show help\n"
-			"    filter.exe --functions		   : Show help for all functions\n"
-			"    filter.exe --help <function>  : Show help for a specific function\n"
-			"    filter.exe <options> <parameters> <input-program> <image-path>\n"
+			"    ty_ipl_driver.exe <options> <parameters> <input-program> <image-path>\n"
 			"\n"
 			"Options : \n"
+			"    --help                   : Show help\n"
+			"    --functions              : Show help for all functions\n"
+			"    --help <function>         : Show help for a specific function\n"
 			"    --prefilter=<program>    : Optional program to run on image before running main program\n"
 			"    --launch                 : Display the resulting image\n"
 			"    --output_dir=<dir>       : Directory to save the result in\n"
 			"    --experiment             : Run an experiment\n"
 			"    --contact                : Create a contact sheet for result images\n"
+			"    --sphinx=<dir>           : Generate reStructred text docs for all functions\n"
+			"    --functions_md           : Generate a basic summary of all functions using markdown syntax\n"
 			"\n"
 			"Parameters : \n"
 			"    Filter script parameters can be passed using the form <key>=<value>. The value can be a\n"
@@ -426,10 +428,28 @@ namespace runtime
 
 			fs::path image_path(output_dir);
 			image_path /= "images";
-			image_path /= (fname + ".jpg");
+			std::string img_name = (fname + ".png");
+			image_path /= img_name ;
+			bool found_img = false;
 			if (fs::exists(image_path))
-			{ 
-				fprintf(file, ".. image:: images/%s.jpg\n", fname.c_str());
+			{
+				found_img = true;
+			}
+			else
+			{
+				// look for jpg
+				image_path = fs::path{ output_dir };
+				image_path /= "images";
+				img_name = (fname + ".jpg");
+				image_path /= img_name;
+				if (fs::exists(image_path))
+				{
+					found_img = true;
+				}
+			}
+			if (found_img)
+			{
+				fprintf(file, ".. image:: images/%s\n", img_name.c_str());
 			}
 
 			fclose(file);
