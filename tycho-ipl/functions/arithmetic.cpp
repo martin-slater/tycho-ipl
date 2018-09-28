@@ -66,7 +66,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
-		"mulitply",
+		"multiply",
 		"Component wise multiply two images", multiply)
 	{
 		cv::multiply(*src1->get_opencv(), *src2->get_opencv(), *dst->get_opencv());
