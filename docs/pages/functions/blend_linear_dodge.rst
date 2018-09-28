@@ -20,3 +20,4 @@ Photoshop linear_dodge blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_linear_dodge.png

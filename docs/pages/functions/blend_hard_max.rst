@@ -20,3 +20,4 @@ Photoshop hard_mix blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_hard_max.png

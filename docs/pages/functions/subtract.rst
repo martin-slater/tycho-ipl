@@ -20,3 +20,4 @@ Component wise subtract two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/subtract.png

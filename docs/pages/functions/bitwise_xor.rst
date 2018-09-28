@@ -20,3 +20,4 @@ Component wise and two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/bitwise_xor.png

@@ -20,3 +20,4 @@ Photoshop soft_light blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_soft_light.png

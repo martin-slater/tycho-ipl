@@ -20,3 +20,4 @@ Photoshop lighten blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_lighten.png

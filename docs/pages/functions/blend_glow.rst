@@ -20,3 +20,4 @@ Photoshop glow blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_glow.png

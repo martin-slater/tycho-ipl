@@ -20,3 +20,4 @@ Photoshop exclusion blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_exclusion.png

@@ -20,3 +20,4 @@ Photoshop linear_burn blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_linear_burn.png

@@ -20,3 +20,4 @@ Photoshop vivid_light blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_vivid_lights.png

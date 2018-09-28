@@ -20,3 +20,4 @@ Component wise divide two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/divide.png

@@ -20,3 +20,4 @@ Component wise add two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/add.png

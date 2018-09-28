@@ -20,3 +20,4 @@ Component wise bitwise and two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/bitwise_and.png

@@ -20,3 +20,4 @@ Photoshop color_burn blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_color_burn.png

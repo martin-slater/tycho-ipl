@@ -20,3 +20,4 @@ Photoshop average blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_average.png

@@ -20,3 +20,4 @@ Photoshop negation blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_negation.png

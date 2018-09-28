@@ -20,3 +20,4 @@ Photoshop color_dodge blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_color_dodge.png

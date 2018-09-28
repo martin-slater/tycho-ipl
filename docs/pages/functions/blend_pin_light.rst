@@ -20,3 +20,4 @@ Photoshop pin_light blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_pin_light.png

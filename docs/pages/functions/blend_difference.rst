@@ -20,3 +20,4 @@ Photoshop difference blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_difference.png

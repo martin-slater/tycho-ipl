@@ -20,3 +20,4 @@ Photoshop phoenix blend function.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/blend_phoenix.png
