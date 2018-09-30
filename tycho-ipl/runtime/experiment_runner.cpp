@@ -234,7 +234,7 @@ namespace runtime
 
 	//----------------------------------------------------------------------------
 
-	void experiment_runner::process_outputs(image_result_list& outputs, 
+	void experiment_runner::process_outputs(image_result_list& outputs,
 		const std::experimental::filesystem::path& out_dir, const result_matrix::address& base_addr,
 		const std::string& input_str, const std::string& base_name)
 	{
@@ -254,7 +254,12 @@ namespace runtime
 			image.Image->write_to_file(dst_path.string());
 
 			std::shared_ptr<file_list_node> file_list = std::make_shared<file_list_node>();
-			file_list->add_path(dst_path.string(), input_str + image.Annotation);
+			std::string name = input_str;
+			if (image.Annotation.size())
+			{
+				name = image.Annotation;
+			}
+			file_list->add_path(dst_path.string(), name);
 
 			// add to the output matrix
 			result_matrix::address node_addr(base_addr);
