@@ -62,7 +62,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	edge_canny::edge_canny() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::EdgeDetection, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

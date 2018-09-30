@@ -82,10 +82,6 @@ namespace functions
 #define ADD_FUNCN(_type, _name) add_func<_type>(_name);
 
 
-		// default choices when there are several algorithms to choose from
-		ADD_FUNCN(functions::sepia_yiq, "sepia");
-		ADD_FUNCN(functions::auto_level_histogram_clip, "auto_level");
-		
 		// image functions
 		ADD_FUNC(functions::image_convert);
 		ADD_FUNC(functions::image_load);

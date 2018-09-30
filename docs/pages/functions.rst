@@ -5,5 +5,19 @@ Function Reference
    :maxdepth: 2
    :glob:
 
-   functions/*
+   functions/all
+   functions/support
+   functions/blending
+   functions/arithmetic
+   functions/filtering
+   functions/artistic
+   functions/colorreduction
+   functions/edgedetection
+   functions/leveling
+   functions/structural
+
+
+
+
+
 

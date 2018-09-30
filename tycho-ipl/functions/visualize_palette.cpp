@@ -44,7 +44,7 @@ namespace tycho
 namespace image_processing
 {
 namespace functions
-{ 
+{
 
 	static const char Name[] = "visualize_palette";
 	static const char Desc[] = "Create a visualization of the colours used in the image";
@@ -56,7 +56,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	visualize_palette::visualize_palette() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Support, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

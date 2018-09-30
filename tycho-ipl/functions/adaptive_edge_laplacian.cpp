@@ -78,7 +78,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	adaptive_edge_laplacian::adaptive_edge_laplacian() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::EdgeDetection, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

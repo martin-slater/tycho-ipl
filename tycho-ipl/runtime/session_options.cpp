@@ -38,7 +38,7 @@
 #include <filesystem>
 #else
 #include <experimental/filesystem>
-#endif 
+#endif
 
 namespace std_filesystem = std::experimental::filesystem;
 
@@ -391,14 +391,21 @@ namespace runtime
 			}
 		};
 
-		auto fp = [&output_dir, pp](function* func) {
+		// group algorithms by group
+		using PathList = std::list<std::string>;
+		using FuncMap = std::map<function::Group, PathList>;
+		FuncMap func_map;
+		PathList all_funcs;
+
+		auto fp = [&output_dir, pp, &func_map, &all_funcs](function* func) {
 			std::string fname = func->get_name();
 			fs::path output_path(output_dir);
-			output_path /= (fname + ".rst");
+			std::string filename = fname + ".rst";
+			output_path /= filename;
 			FILE* file = fopen(output_path.string().c_str(), "w+b");
 			auto sig = func->get_simple_signature();
 			fprintf(file, "%s\n", sig.c_str());
-			
+
 			// title underlining must be at least the same length as the title otherwise
 			// a warning will be generated
 			fprintf(file, "%s\n\n", std::string(sig.length(), '=').c_str());
@@ -453,10 +460,62 @@ namespace runtime
 			}
 
 			fclose(file);
+
+			auto it = func_map.find(func->get_group());
+			if (it == func_map.end())
+			{
+				it = func_map.insert(std::make_pair(func->get_group(), PathList())).first;
+			}
+			it->second.emplace_back(fname);
+			all_funcs.emplace_back(fname);
 		};
 
 		functions::factory factory;
 		factory.enumerate(std::bind(fp, std::placeholders::_1));
+
+		auto fp_write = [&output_dir](const std::string& fname, const std::string& title, const PathList& names)
+		{
+			fs::path output_path(output_dir);
+			output_path /= (fname + ".rst");
+
+			FILE* file = fopen(output_path.c_str(), "w+b");
+			fprintf(file, "%s\n", title.c_str());
+			fprintf(file, "%s\n\n", std::string(title.length(), '=').c_str());
+			fprintf(file, ".. toctree::\n");
+   			fprintf(file, "   :maxdepth: 2\n\n");
+			for(auto& p : names)
+			{
+				fprintf(file, "   %s\n", p.c_str());
+			}
+
+			fclose(file);
+		};
+
+		// write out per group .rst files
+		for(auto& it : func_map)
+		{
+			auto group = it.first;
+			auto& filenames = it.second;
+			std::string name, title;
+			switch(group)
+			{
+				case function::Group::Arithmetic : name = "arithmetic"; title = "Arithmetic functions"; break;
+				case function::Group::Support : name = "support";  title = "Support functions"; break;
+				case function::Group::Blending : name = "blending";  title = "Blending functions"; break;
+				case function::Group::EdgeDetection : name = "edgedetection";  title = "Edge detection functions"; break;
+				case function::Group::Leveling : name = "leveling";  title = "Image leveling functions"; break;
+				case function::Group::Artistic : name = "artistic";  title = "Artistic effects"; break;
+				case function::Group::Structural : name = "structural";  title = "Structural functions";break;
+				case function::Group::ColorReduction : name = "colorreduction";  title = "Color Reduction algorithms";break;
+				case function::Group::Filtering : name = "filtering";  title = "Image filtering functions"; break;
+
+				default: assert(!"Unhandled group"); continue;
+			}
+			fp_write(name, title, filenames);
+		}
+
+		// write all functions file
+		fp_write("all", "All Functions", all_funcs);
 
 		return EXIT_SUCCESS;
 	}

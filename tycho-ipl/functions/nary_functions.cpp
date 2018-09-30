@@ -60,9 +60,9 @@ namespace functions
 	};
 
 
-	BinaryFunction::BinaryFunction(const char* name, const char* desc) :
+	BinaryFunction::BinaryFunction(Group group, const char* name, const char* desc) :
 		function(
-			name, desc, 
+			group, name, desc,
 			BinaryFuncInputs, 
 			function::DefaultOutputs(), declaration_list())
 	{}
@@ -88,9 +88,9 @@ namespace functions
 		param_desc(ObjectType::Float, "scale", "Scale factor applied to src1", value::make_float(1))
 	};
 
-	ScaledBinaryFunction::ScaledBinaryFunction(const char* name, const char* desc) :
+	ScaledBinaryFunction::ScaledBinaryFunction(Group group, const char* name, const char* desc) :
 		function(
-		name, desc,
+		group, name, desc,
 		ScaledBinaryFuncInputs,
 		function::DefaultOutputs(), declaration_list())
 	{}

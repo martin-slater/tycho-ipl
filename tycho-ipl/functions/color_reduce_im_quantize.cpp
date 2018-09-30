@@ -62,7 +62,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	color_reduce_im_quantize::color_reduce_im_quantize() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::ColorReduction, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{
 
 	}

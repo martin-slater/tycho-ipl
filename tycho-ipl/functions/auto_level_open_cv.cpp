@@ -48,7 +48,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	auto_level_open_cv::auto_level_open_cv() :
-		UnaryFunction(Name, Desc)
+		UnaryFunction(Group::Leveling, Name, Desc)
 	{
 	}
 

@@ -44,7 +44,7 @@
 //----------------------------------------------------------------------------
 
 namespace tycho
-{   
+{
 namespace image_processing
 {
 
@@ -111,7 +111,7 @@ namespace image_processing
 		param_desc() = default;
 
 		param_desc(
-			ObjectType type, 
+			ObjectType type,
 			const std::string& name, 
 			const std::string& desc, 
 			const value& def,
@@ -158,12 +158,26 @@ namespace image_processing
 		static const std::vector<param_desc> DefaultOutputs();
 		static const std::vector<param_desc> NoOutputs();
 
+		enum class Group
+		{
+			Support,
+			Arithmetic,
+			Filtering,
+			Blending,
+			EdgeDetection,
+			ColorReduction,
+			Structural,
+			Leveling,
+			Artistic
+		};
+
 	public:
 		/// Constructor
-		function(const char* name, const char* desc,
+		function(Group group, const char* name, const char* desc,
 			const param_list& inputs,
 			const param_list& outputs,
 			const declaration_list& constants) :
+			m_group(group),
 			m_Name(name),
 			m_Desc(desc),
 			m_Inputs(inputs),
@@ -188,12 +202,14 @@ namespace image_processing
 		bool has_param(const char*) const;
 		bool get_param(const std::string& key, param_desc&);
 
+		Group       get_group() const { return m_group; }
 		std::string get_signature() const;
 		std::string get_simple_signature() const;
 		const char* get_name() const { return m_Name; }
 		const char* get_description() const { return m_Desc; }
 
 	protected:
+		const Group m_group;
 		const char* m_Name = nullptr;
 		const char* m_Desc = nullptr;
 		const param_list m_Inputs;

@@ -60,11 +60,11 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	color_reduce_lib_image_quant::color_reduce_lib_image_quant() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::ColorReduction, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------
-	
+
 	bool color_reduce_lib_image_quant::dispatch(context * /*ctx*/, const kv_dict & inputs, kv_dict & outputs)
 	{
 		image* src = inputs.get_image("src");

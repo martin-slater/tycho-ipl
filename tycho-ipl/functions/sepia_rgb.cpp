@@ -50,7 +50,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	sepia_rgb::sepia_rgb() :
-		UnaryFunction(Name, Desc)
+		UnaryFunction(Group::Artistic, Name, Desc)
 	{
 	}
 

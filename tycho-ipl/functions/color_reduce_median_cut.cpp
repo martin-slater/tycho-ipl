@@ -61,7 +61,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	color_reduce_median_cut::color_reduce_median_cut() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::ColorReduction, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

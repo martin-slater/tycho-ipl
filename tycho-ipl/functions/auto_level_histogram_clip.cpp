@@ -54,7 +54,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	auto_level_histogram_clip::auto_level_histogram_clip() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Leveling, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 

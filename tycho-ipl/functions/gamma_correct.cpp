@@ -53,7 +53,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	gamma_correct::gamma_correct() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Leveling, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

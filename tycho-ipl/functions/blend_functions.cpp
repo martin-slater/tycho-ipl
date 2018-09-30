@@ -114,35 +114,35 @@ namespace functions
 	uchar glow(uchar B, uchar L)		{ return (reflect(L, B)); }
 	uchar phoenix(uchar B, uchar L)		{ return ((std::min(B, L) - std::max(B, L) + 255)); }
 
-	#define	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(ClassName, Name, Desc) \
-		IMAG_PROC_DEFINE_BINARY_FUNCTION(Name, "Photoshop " #ClassName " blend function.", blend_##ClassName) \
+	#define	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group, ClassName, Name, Desc) \
+		IMAG_PROC_DEFINE_BINARY_FUNCTION(Group, Name, "Photoshop " #ClassName " blend function.", blend_##ClassName) \
 		{ return blend(src1, src2, dst, ClassName); }
 
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(normal, "blend_normal", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(lighten, "blend_lighten", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(darken, "blend_darken", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(multiply, "blend_multiply", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(average, "blend_average", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(add, "blend_add", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(subtract, "blend_sub", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(difference, "blend_difference", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(negation, "blend_negation", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(screen, "blend_screen", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(exclusion, "blend_exclusion", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(overlay, "blend_overlay", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(soft_light, "blend_soft_light", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(hard_light, "blend_hard_light", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(color_dodge, "blend_color_dodge", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(color_burn, "blend_color_burn", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(linear_dodge, "blend_linear_dodge", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(linear_burn, "blend_linear_burn", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(linear_light, "blend_linear_light", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(vivid_light, "blend_vivid_lights", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(pin_light, "blend_pin_light", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(hard_mix, "blend_hard_max", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(reflect, "blend_reflect", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(glow, "blend_glow", "");
-	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(phoenix, "blend_phoenix", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, normal, "blend_normal", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, lighten, "blend_lighten", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, darken, "blend_darken", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, multiply, "blend_multiply", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, average, "blend_average", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, add, "blend_add", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, subtract, "blend_sub", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, difference, "blend_difference", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, negation, "blend_negation", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, screen, "blend_screen", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, exclusion, "blend_exclusion", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, overlay, "blend_overlay", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, soft_light, "blend_soft_light", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, hard_light, "blend_hard_light", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, color_dodge, "blend_color_dodge", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, color_burn, "blend_color_burn", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, linear_dodge, "blend_linear_dodge", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, linear_burn, "blend_linear_burn", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, linear_light, "blend_linear_light", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, vivid_light, "blend_vivid_lights", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, pin_light, "blend_pin_light", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, hard_mix, "blend_hard_max", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, reflect, "blend_reflect", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, glow, "blend_glow", "");
+	IMAG_PROC_DEFINE_BINARY_BLEND_FUNCTION(Group::Blending, phoenix, "blend_phoenix", "");
 
 } // end namespace
 } // end namespace

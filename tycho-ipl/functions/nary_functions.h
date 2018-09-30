@@ -54,8 +54,8 @@ namespace functions
 	class TYCHO_IMAGEPROCESSING_ABI UnaryFunction : public function
 	{
 	public:
-		UnaryFunction(const char* name, const char* desc) :
-			function(name, desc, function::DefaultInputs(), function::DefaultOutputs(), declaration_list())
+		UnaryFunction(Group group, const char* name, const char* desc) :
+			function(group, name, desc, function::DefaultInputs(), function::DefaultOutputs(), declaration_list())
 		{}
 
 		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
@@ -69,7 +69,7 @@ namespace functions
 	class TYCHO_IMAGEPROCESSING_ABI BinaryFunction : public function
 	{
 	public:
-		BinaryFunction(const char* name, const char* desc);
+		BinaryFunction(Group group, const char* name, const char* desc);
 		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		virtual void execute(image* src1, image* src2, image* dst) = 0;
 	};
@@ -81,7 +81,7 @@ namespace functions
 	class TYCHO_IMAGEPROCESSING_ABI ScaledBinaryFunction : public function
 	{
 	public:
-		ScaledBinaryFunction(const char* name, const char* desc);
+		ScaledBinaryFunction(Group group, const char* name, const char* desc);
 		bool dispatch(context* ctx, const kv_dict& inputs, kv_dict& outputs) override;
 		virtual void execute(image* src1, float scale, image* src2, image* dst) = 0;
 	};
@@ -92,8 +92,8 @@ namespace functions
 		Name (); \
 		void execute(image* src, image* dst);	};
 
-#define IMAG_PROC_DEFINE_UNARY_FUNCTION(Name, Desc, ClassName) \
-	ClassName :: ClassName() : UnaryFunction(Name, Desc) {} \
+#define IMAG_PROC_DEFINE_UNARY_FUNCTION(Group, Name, Desc, ClassName) \
+	ClassName :: ClassName() : UnaryFunction(Group, Name, Desc) {} \
 	void ClassName::execute(image* src, image* dst)
 
 #define IMAG_PROC_DECLARE_BINARY_FUNCTION(Name) \
@@ -102,8 +102,8 @@ namespace functions
 		Name (); \
 		void execute(image* src1, image* src2, image* dst);	};
 
-#define IMAG_PROC_DEFINE_BINARY_FUNCTION(Name, Desc, ClassName) \
-	ClassName :: ClassName() : BinaryFunction(Name, Desc) {} \
+#define IMAG_PROC_DEFINE_BINARY_FUNCTION(Group, Name, Desc, ClassName) \
+	ClassName :: ClassName() : BinaryFunction(Group, Name, Desc) {} \
 	void ClassName::execute(image* src1, image* src2, image* dst)
 
 #define IMAG_PROC_DECLARE_SCALED_BINARY_FUNCTION(Name) \
@@ -113,7 +113,7 @@ namespace functions
 		void execute(image* src1, float scale, image* src2, image* dst);	};
 
 #define IMAG_PROC_DEFINE_SCALED_BINARY_FUNCTION(Name, Desc, ClassName) \
-	ClassName :: ClassName() : ScaledBinaryFunction(Name, Desc) {} \
+	ClassName :: ClassName() : ScaledBinaryFunction(Group::Arithmetic, Name, Desc) {} \
 	void ClassName::execute(image* src1, float scale, image* src2, image* dst)
 
 } // end namespace

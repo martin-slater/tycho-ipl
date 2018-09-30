@@ -65,7 +65,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	simplify_colors::simplify_colors() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::ColorReduction, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------

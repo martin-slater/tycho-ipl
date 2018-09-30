@@ -67,7 +67,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	color_reduce_im_mean_shift::color_reduce_im_mean_shift() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::ColorReduction, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{
 
 	}

@@ -45,6 +45,7 @@ namespace functions
 {
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"add",
 		"Component wise add two images", add)
 	{
@@ -59,6 +60,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"subtract",
 		"Component wise subtract two images", subtract)
 	{
@@ -66,6 +68,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"multiply",
 		"Component wise multiply two images", multiply)
 	{
@@ -80,6 +83,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"divide",
 		"Component wise divide two images", divide)
 	{
@@ -87,6 +91,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"bitwise_and",
 		"Component wise bitwise and two images", bitwise_and)
 	{
@@ -94,6 +99,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"bitwise_or",
 		"Component wise bitwise or two images", bitwise_or)
 	{
@@ -101,6 +107,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_BINARY_FUNCTION(
+		Group::Arithmetic,
 		"bitwise_xor",
 		"Component wise and two images", bitwise_xor)
 	{
@@ -108,6 +115,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_UNARY_FUNCTION(
+		Group::Arithmetic,
 		"max",
 		"max", max)
 	{
@@ -133,6 +141,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_UNARY_FUNCTION(
+		Group::Arithmetic,
 		"min",
 		"min", min)
 	{

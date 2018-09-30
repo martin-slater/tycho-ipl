@@ -65,8 +65,8 @@ namespace functions
 
 	//----------------------------------------------------------------------------
 
-	morphological_function::morphological_function(const char* name, const char* desc) : 
-		function(name, desc,  Inputs, function::DefaultOutputs(), declaration_list())
+	morphological_function::morphological_function(const char* name, const char* desc) :
+		function(Group::Structural, name, desc,  Inputs, function::DefaultOutputs(), declaration_list())
 	{
 
 	}

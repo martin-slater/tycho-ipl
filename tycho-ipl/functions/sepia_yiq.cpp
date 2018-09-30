@@ -56,6 +56,7 @@ namespace functions
 
 	sepia_yiq::sepia_yiq() :
 		function(
+		Group::Artistic, 
 		Name, Desc,
 		Inputs, function::DefaultOutputs(), declaration_list())
 	{}

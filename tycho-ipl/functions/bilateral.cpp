@@ -57,7 +57,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	bilateral::bilateral() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Filtering, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 

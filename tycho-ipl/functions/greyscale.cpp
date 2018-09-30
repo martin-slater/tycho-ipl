@@ -49,7 +49,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	greyscale::greyscale() :
-		UnaryFunction(Name, Desc)
+		UnaryFunction(Group::Artistic, Name, Desc)
 	{
 	}
 

@@ -63,6 +63,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	oil_painting::oil_painting() : function(
+		Group::Artistic,
 		"oil_painting",
 		"Transform the image to have an oil painted appearance",
 		Inputs, function::DefaultOutputs(), declaration_list())

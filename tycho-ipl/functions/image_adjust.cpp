@@ -53,7 +53,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	image_adjust::image_adjust() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Leveling, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 

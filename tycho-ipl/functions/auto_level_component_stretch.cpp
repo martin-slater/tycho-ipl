@@ -48,7 +48,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	auto_level_component_stretch::auto_level_component_stretch() :
-		UnaryFunction(Name, Desc)
+		UnaryFunction(Group::Leveling, Name, Desc)
 	{
 	}
 

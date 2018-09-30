@@ -59,6 +59,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	kuwahara::kuwahara() : function(
+		Group::Artistic,
 		"kuwahara",
 		"Apply the kuwahara operator. This smooths textured regions whilst maintaining edges.",
 		Inputs, function::DefaultOutputs(), declaration_list())

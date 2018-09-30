@@ -55,6 +55,7 @@ namespace functions
 
 	image_load::image_load() :
 		function(
+		Group::Support,
 		"load_image",
 		"Load an image to disk",
 		LoadInputs, function::DefaultOutputs(), declaration_list())
@@ -84,6 +85,7 @@ namespace functions
 
 	image_save::image_save() :
 		function(
+		Group::Support,
 		"save_image",
 		"Write image to disk",
 		SaveInputs, function::NoOutputs(), declaration_list())
@@ -114,6 +116,7 @@ namespace functions
 
 	image_convert::image_convert() :
 		function(
+			Group::Support,
 			"convert_image",
 			"Convert an image to a different format",
 			ConvertInputs, function::DefaultOutputs(), declaration_list())
@@ -158,6 +161,7 @@ namespace functions
 
 	image_clamp_size::image_clamp_size() :
 		function(
+		Group::Support,
 		"clamp_image_size",
 		"Clamp an image to a given size whilst maintaining its aspect ratio",
 		ClampSizeInputs, function::DefaultOutputs(), declaration_list())

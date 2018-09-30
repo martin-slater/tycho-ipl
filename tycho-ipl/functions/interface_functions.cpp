@@ -54,7 +54,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	experiment_add_image::experiment_add_image() :
-		function(Name, Desc, Inputs, function::NoOutputs(), declaration_list())
+		function(Group::Support, Name, Desc, Inputs, function::NoOutputs(), declaration_list())
 	{}
 
 

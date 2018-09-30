@@ -58,6 +58,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	remove_intensity::remove_intensity() : function(
+		Group::Support,
 		"remove_intensity",
 		"Removes the intensity from the image. If the image is in a colour space that " \
 		"contains an intensity channel (Lab, HLS, HSV) then this will be cleared. If the " \

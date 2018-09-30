@@ -53,7 +53,7 @@ namespace functions
 	//----------------------------------------------------------------------------
 
 	copy::copy() :
-		function(Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
+		function(Group::Support, Name, Desc, Inputs, function::DefaultOutputs(), declaration_list())
 	{}
 
 	//----------------------------------------------------------------------------
