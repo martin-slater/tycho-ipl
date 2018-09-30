@@ -73,7 +73,7 @@ namespace functions
 	}
 
 	IMAG_PROC_DEFINE_SCALED_BINARY_FUNCTION(
-		"scaled_multiple",
+		"scaled_multiply",
 		"Component wise multiply two images", scaled_multiply)
 	{
 		cv::multiply(*src1->get_opencv(), *src2->get_opencv(), *dst->get_opencv(), scale);
