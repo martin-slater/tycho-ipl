@@ -223,7 +223,7 @@ class MakeDocImages(object):
             n = func[1][2]
             script = '''
                     input %s arg1 = 0;
-                    #call experiment_add_image(name="source", src=__src__);
+                    call experiment_add_image(name="source", src=__src__);
                     call %s(src=__src__, dst=__dst__, %s=arg1);
                     ''' % (t, f, a)
             args = 'arg1' + '=' + ','.join([str(e) for e in n])
