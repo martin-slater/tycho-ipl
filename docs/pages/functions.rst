@@ -5,7 +5,6 @@ Function Reference
    :maxdepth: 2
    :glob:
 
-   functions/all
    functions/support
    functions/blending
    functions/arithmetic
