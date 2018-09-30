@@ -89,7 +89,7 @@ namespace image_processing
 			if (v > max)
 				return false;
 
-			if (v < 1)
+			if (v < 0)
 				return false;
 
 			return true;
