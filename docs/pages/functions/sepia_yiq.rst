@@ -20,3 +20,4 @@ Sepia tone effect calculated in YIQ space. Results in a deeper brown colour than
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/sepia_yiq.png

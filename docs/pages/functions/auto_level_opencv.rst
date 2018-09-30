@@ -19,3 +19,4 @@ Auto levels image lighting using OpenCV's built in algorithm
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/auto_level_opencv.png

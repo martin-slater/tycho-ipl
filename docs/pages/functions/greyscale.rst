@@ -19,3 +19,4 @@ Convert colour image to greyscale.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/greyscale.png

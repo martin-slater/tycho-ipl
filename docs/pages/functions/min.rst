@@ -19,3 +19,4 @@ min
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/min.png

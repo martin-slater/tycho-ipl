@@ -20,3 +20,4 @@ Remove noise from the passed image.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/denoise.png

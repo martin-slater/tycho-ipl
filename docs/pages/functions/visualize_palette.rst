@@ -19,3 +19,4 @@ Create a visualization of the colours used in the image
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/visualize_palette.png

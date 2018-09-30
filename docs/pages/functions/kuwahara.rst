@@ -20,4 +20,4 @@ Apply the kuwahara operator. This smooths textured regions whilst maintaining ed
 
    "**dst**", "*image*", "", "Destination image"
 
-.. image:: images/kuwahara.jpg
+.. image:: images/kuwahara.png

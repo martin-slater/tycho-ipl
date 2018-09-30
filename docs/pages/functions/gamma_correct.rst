@@ -20,3 +20,4 @@ Apply gamma correct to an image
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/gamma_correct.png

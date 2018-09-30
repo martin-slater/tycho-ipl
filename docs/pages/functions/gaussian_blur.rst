@@ -22,3 +22,4 @@ Blur the image using a gaussian filter
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/gaussian_blur.png

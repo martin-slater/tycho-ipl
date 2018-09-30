@@ -20,3 +20,4 @@ Removes the intensity from the image. If the image is in a colour space that con
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/remove_intensity.png

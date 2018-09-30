@@ -18,9 +18,8 @@ evaluate different algorithms across a wide range of test data.
    :maxdepth: 2
    :caption: Contents:
 
-   pages/overview
-   pages/scripting
    pages/driver
+   pages/scripting
    pages/functions
    pages/license
 

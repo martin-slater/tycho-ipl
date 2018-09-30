@@ -19,3 +19,4 @@ Sepia tone effect calculated in RGB space. Results in a less brown image than se
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/sepia_rgb.png

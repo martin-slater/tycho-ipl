@@ -49,6 +49,7 @@ BASE_DIR = os.path.realpath(os.path.dirname(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, 'pages', 'functions', 'images')
 IMAGE_DIR = os.path.join(BASE_DIR, 'images')
 BUILD_DIR = os.path.join(BASE_DIR, '..', 'build', 'bin')
+FUNCTION_DOC_DIR = os.path.join(BASE_DIR, 'pages', 'functions')
 
 if platform.system() == 'Windows':
     BUILD_DIR = os.path.join(BUILD_DIR, 'Debug')
@@ -63,7 +64,8 @@ UNARY_FUNCTIONS = [
     'min',
     'max',
     'sepia_rgb',
-    'visualize_palette'
+    'visualize_palette',
+    #'simplify_colors'
 ]
 
 # binary functions
@@ -103,6 +105,20 @@ BINARY_FUNCTIONS = [
 ]
 
 # parameterized functions
+
+PARAM1_FUNCTIONS = [
+    ( 'sepia_yiq', ( 'int', 'offset', [-20, -10, 0, 10, 20])),
+    ( 'kuwahara', ( 'int', 'kernel_size', [3, 5, 7, 9])),
+    ( 'gamma_correct', ( 'float', 'gamma', [0.5, 1.0, 1.5, 2.0])),
+    ( 'denoise', ( 'float', 'strength', [1, 3, 6, 9])),
+    ( 'auto_level_histogram_clip', ( 'float', 'clip_percent', [0.0, 1.0, 2.0, 4.0, 8.0])),
+    ( 'color_reduce_libimagequant', ( 'int', 'num_colors', [0, 4, 16, 256, 1024])),
+    ( 'color_reduce_median_cut', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
+    ( 'gaussian_blur', ( 'int', 'kernel_size', [3, 5, 7, 9])),
+    ( 'remove_intensity', ( 'int', 'black-cutoff', [1, 4, 8, 16])),
+
+
+]
 
 #------------------------------------------------------------------------------
 # A whole lot of messing around for deleting a directory and all its contents
@@ -153,8 +169,12 @@ def rmtree(path):
                 os.rmdir(fullname)
             else:
                 os.unlink(fullname)
-    _waitfor(_rmtree_inner, path, waitall=True)
-    _waitfor(os.rmdir, path)
+
+    if platform.system() == "Windows":
+        _waitfor(_rmtree_inner, path, waitall=True)
+        _waitfor(os.rmdir, path)
+    else:
+        shutil.rmtree(path)
 
 #-----------------------------------------------------------------------------
 # Class
@@ -167,8 +187,14 @@ class MakeDocImages(object):
         """ Constructor """
 
     def run(self):
+        self._param1_funcs()
         self._unary_funcs()
         self._binary_funcs()
+
+        # update function docs
+        args =[DRIVER_PATH, '--sphinx=' + FUNCTION_DOC_DIR]
+        print(' '.join(args))
+        subprocess.call(args)
 
     def _unary_funcs(self):
         for func in UNARY_FUNCTIONS:
@@ -189,23 +215,48 @@ class MakeDocImages(object):
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
             self._execute_script(func, script, 'nature.png')
 
-    def _execute_script(self, func, script, source_image):
-            temp_dir = tempfile.mkdtemp(prefix='fx_')
-            fname = tempfile.mkstemp(suffix='.fx', prefix=func + '_')[1]
-            with open(fname, 'w+') as fx:
-                fx.write(script)
-            self._execute(fname, os.path.join(IMAGE_DIR, source_image), temp_dir)
+    def _param1_funcs(self):
+        for func in PARAM1_FUNCTIONS:
+            f = func[0]
+            t = func[1][0]
+            a = func[1][1]
+            n = func[1][2]
+            script = '''
+                    input %s arg1 = 0;
+                    #call experiment_add_image(name="source", src=__src__);
+                    call %s(src=__src__, dst=__dst__, %s=arg1);
+                    ''' % (t, f, a)
+            args = 'arg1' + '=' + ','.join([str(e) for e in n])
+            self._execute_script(f, script, 'nature.png', args)
 
-            # get the output and copy to the correct directory
-            output = self._find_contact_sheet(temp_dir)
-            dst = os.path.join(OUTPUT_DIR, func + '.png')
-            shutil.copyfile(output, dst)
-            rmtree(temp_dir)
+    def _execute_script(self, func, script, source_image,  *args):
+        temp_dir = tempfile.mkdtemp(prefix='fx_')
+        fname = tempfile.mkstemp(suffix='.fx', prefix=func + '_')[1]
+        if platform.system() != 'Windows':
+            umask = os.umask(0)
+            os.umask(umask)
+            os.chmod(temp_dir, 0o777)
+            os.chmod(fname, 0o777)
 
-    def _execute(self, script_path, image_path, temp_dir):
-        args = [DRIVER_PATH, '--experiment', '--output_dir=' + temp_dir, script_path, image_path]
-        if subprocess.call(args):
-            raise Exception(' '.join(args))
+        with open(fname, 'w+') as fx:
+            fx.write(script)
+        self._execute(fname, os.path.join(IMAGE_DIR, source_image), temp_dir, *args)
+        # get the output and copy to the correct directory
+        output = self._find_contact_sheet(temp_dir)
+        dst = os.path.join(OUTPUT_DIR, func + '.png')
+        shutil.copyfile(output, dst)
+        rmtree(temp_dir)
+        os.unlink(fname)
+
+    def _execute(self, script_path, image_path, temp_dir, *args):
+        cmd = [DRIVER_PATH, '--experiment', '--output_dir=' + temp_dir]
+        for arg in args:
+            cmd.append(arg)
+        cmd.append(script_path)
+        cmd.append(image_path)
+        print(' '.join(cmd))
+        if subprocess.call(cmd):
+            raise Exception(' '.join(cmd))
 
     def _find_contact_sheet(self, temp_dir):
         # find path to the contact sheet

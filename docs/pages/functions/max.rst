@@ -19,3 +19,4 @@ max
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/max.png

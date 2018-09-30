@@ -19,3 +19,4 @@ Auto levels image lighting by stretching each RGB channel to use the full range 
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/auto_level_rgb_stretch.png

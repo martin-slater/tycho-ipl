@@ -20,3 +20,4 @@ Auto levels image lighting based on the image histogram.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/auto_level_histogram_clip.png
