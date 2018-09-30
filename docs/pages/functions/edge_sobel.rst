@@ -23,3 +23,4 @@ Find edges using Sobel filter
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/edge_sobel.png

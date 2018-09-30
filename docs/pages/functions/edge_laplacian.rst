@@ -21,3 +21,4 @@ Find edges using laplacian filter
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/edge_laplacian.png

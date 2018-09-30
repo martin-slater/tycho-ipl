@@ -23,3 +23,4 @@ Find edges using a Laplacian filter. This will search the filter space for the r
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/adaptive_edge_laplacian.png

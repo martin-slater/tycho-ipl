@@ -1,4 +1,4 @@
-scaled_multiple(src1, src2, scale)
+scaled_multiply(src1, src2, scale)
 ==================================
 
 Component wise multiply two images
@@ -21,3 +21,4 @@ Component wise multiply two images
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/scaled_multiply.png

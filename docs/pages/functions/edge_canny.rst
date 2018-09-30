@@ -23,3 +23,4 @@ Canny edge detection filter
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/edge_canny.png

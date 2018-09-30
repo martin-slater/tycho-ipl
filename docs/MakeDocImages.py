@@ -104,8 +104,13 @@ BINARY_FUNCTIONS = [
     'divide'
 ]
 
-# parameterized functions
+# scaled functions
+SCALED_BINARY_FUNCTIONS = [
+    'scaled_add',
+    'scaled_multiply',
+]
 
+# parameterized functions
 PARAM1_FUNCTIONS = [
     ( 'sepia_yiq', ( 'int', 'offset', [-20, -10, 0, 10, 20])),
     ( 'kuwahara', ( 'int', 'kernel_size', [3, 5, 7, 9])),
@@ -116,6 +121,10 @@ PARAM1_FUNCTIONS = [
     ( 'color_reduce_median_cut', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
     ( 'gaussian_blur', ( 'int', 'kernel_size', [3, 5, 7, 9])),
     ( 'remove_intensity', ( 'int', 'black-cutoff', [1, 4, 8, 16])),
+    ( 'edge_canny', ( 'int', 'kernel_size', [3, 5, 7])),
+    ( 'adaptive_edge_laplacian', ( 'int', 'edge_percent', [5, 10, 15, 20])),
+    ( 'edge_laplacian', ( 'int', 'kernel_size', [1, 3, 5, 7, 9])),
+    ( 'edge_sobel', ( 'int', 'kernel_size', [1, 3, 5, 7])),
 
 
 ]
@@ -187,6 +196,7 @@ class MakeDocImages(object):
         """ Constructor """
 
     def run(self):
+        self._scaled_binary_funcs()
         self._param1_funcs()
         self._unary_funcs()
         self._binary_funcs()
@@ -214,6 +224,19 @@ class MakeDocImages(object):
                     call %s(src1=__src__, src2=src2, dst=__dst__);
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
             self._execute_script(func, script, 'nature.png')
+
+    def _scaled_binary_funcs(self):
+        for func in SCALED_BINARY_FUNCTIONS:
+            script = '''
+                    input float scale;
+                    input image src2;
+                    call load_image(path="%s", dst=src2);
+                    call experiment_add_image(name="source", src=__src__);
+                    call experiment_add_image(name="mask", src=src2);
+                    call %s(src1=__src__, src2=src2, scale=scale, dst=__dst__);
+                    ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
+            args = 'scale' + '=' + ','.join([str(e) for e in [0.0, 0.1, 0.2, 0.4, 0.8, 1.0]])
+            self._execute_script(func, script, 'nature.png', args)
 
     def _param1_funcs(self):
         for func in PARAM1_FUNCTIONS:

@@ -21,3 +21,4 @@ Compute src1 * scale + src2
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/scaled_add.png
