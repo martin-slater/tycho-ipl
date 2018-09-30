@@ -50,6 +50,6 @@ only_commits:
   files:
     - CMakeLists.txt
     - appveyor.yml
-    - src/
+    - tycho-ipl/
     - driver/
     - 3rdparty/
