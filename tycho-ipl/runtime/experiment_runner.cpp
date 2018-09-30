@@ -45,7 +45,7 @@ namespace tycho
 namespace image_processing
 {
 namespace runtime
-{ 
+{
 
 	//----------------------------------------------------------------------------
 
@@ -53,12 +53,14 @@ namespace runtime
 		runner(options, output),
 		m_OutputDir(options.OutputDir)
 	{
+		namespace fs = std_filesystem;
+
 		build_input_matrix(options.ProgramInputs);
-		
+
 		// calculate the number of images the program will write
 		size_t num_outputs = get_program()->num_output_images();
 
-		// create the result matrix, first dimension is input image followed by the 
+		// create the result matrix, first dimension is input image followed by the
 		// input arguments
 		std::vector<size_t> output_matrix_dims;
 		std::vector<std::string> output_dims_names;
@@ -76,9 +78,11 @@ namespace runtime
 		std::string program_name;
 		utils::get_filename_no_ext(options.Program, program_name);
 		auto now_str = utils::get_datetime_now_string();
+		auto root_dir = m_OutputDir;
 		m_OutputDir = m_OutputDir + program_name + "-" + now_str + "/";
+		fs::create_directory(m_OutputDir, root_dir);
 		m_ImageRootDir = m_OutputDir + "Images/";
-		utils::create_directories(m_ImageRootDir);
+		fs::create_directory(m_ImageRootDir, m_OutputDir);
 
 		// create contact sheet name
 		{
@@ -144,9 +148,9 @@ namespace runtime
 					if (ch == '.')
 						ch = '_';
 				}
-				std_filesystem::path out_dir(m_ImageRootDir);	
+				std_filesystem::path out_dir(m_ImageRootDir);
 				out_dir /= filename;		 
-				std_filesystem::create_directories(out_dir);
+				std_filesystem::create_directory(out_dir, m_ImageRootDir);
 
 				// run the experiment
 				image_ptr copy(image->clone());
@@ -202,7 +206,7 @@ namespace runtime
 				input_str.append(")");
 
 				get_output()->write("%s ... ", input_str.c_str());
-				
+
 				image_result_list outputs;
 				utils::timer timer;
 				runner::run(program, source, inputs, outputs);
@@ -239,7 +243,14 @@ namespace runtime
 		for (auto image : outputs)
 		{
 			std_filesystem::path dst_path(out_dir);
-			dst_path /= (base_name + image.Annotation + ".png");
+			std::string filename = (base_name + "_" + input_str + "_" + image.Annotation);
+			for(auto& ch : filename)
+			{
+				if(!(std::isalpha(ch) || std::isdigit(ch)))
+					ch = '_';
+			}
+			filename += ".png";
+			dst_path /= filename;
 			image.Image->write_to_file(dst_path.string());
 
 			std::shared_ptr<file_list_node> file_list = std::make_shared<file_list_node>();
