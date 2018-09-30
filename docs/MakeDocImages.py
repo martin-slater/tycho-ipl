@@ -245,11 +245,11 @@ class MakeDocImages(object):
             a = func[1][1]
             n = func[1][2]
             script = '''
-                    input %s arg1 = 0;
+                    input %s %s = 0;
                     call experiment_add_image(name="source", src=__src__);
-                    call %s(src=__src__, dst=__dst__, %s=arg1);
-                    ''' % (t, f, a)
-            args = 'arg1' + '=' + ','.join([str(e) for e in n])
+                    call %s(src=__src__, dst=__dst__, %s=%s);
+                    ''' % (t, a, f, a, a)
+            args = a + '=' + ','.join([str(e) for e in n])
             self._execute_script(f, script, 'nature.png', args)
 
     def _execute_script(self, func, script, source_image,  *args):
