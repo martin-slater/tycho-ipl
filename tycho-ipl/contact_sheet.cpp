@@ -43,7 +43,7 @@ namespace image_processing
 	//----------------------------------------------------------------------------
 
 	void contact_sheet::auto_build(
-		const std::string& /*title*/, 
+		const std::string& /*title*/,
 		const result_matrix& results,
 		const std::string& output_path,
 		const runtime::session_options::file_list& input_files)
@@ -56,7 +56,7 @@ namespace image_processing
 
 		if (results.get_num_nodes() == 0 )
 			return;
-		
+
 		if (results.num_dimensions() == 1 || results.num_dimensions() == 2)
 		{
 			int max_image_width = -1;
@@ -68,7 +68,7 @@ namespace image_processing
 				for (size_t x = 0; x < results.get_dimension_size(0); ++x)
 				{
 					file_list_node* img_list = nullptr;
-					
+
 					if (results.num_dimensions() == 1)
 						img_list = (file_list_node*)results.get_node({ x }).get();
 					else
@@ -107,10 +107,11 @@ namespace image_processing
 				++num_images_wide;
 
 			// create single image to compose all images on to
-			size_t total_width = num_images_wide * max_image_width + 
+			const int image_top_border = draw_originals ? ImageTopBorder : ImageBorder;
+			size_t total_width = num_images_wide * max_image_width +
 								2 * ImageBorder + (num_images_wide - 1) * ImageBorder;
-			size_t total_height = num_images_high * (max_image_height + InfoRectHeight) + 
-								ImageTopBorder + ImageBorder + (num_images_high - 1) * ImageBorder;
+			size_t total_height = num_images_high * (max_image_height + InfoRectHeight) +
+								  image_top_border + ImageBorder + (num_images_high - 1) * ImageBorder;
 
 			image contact_sheet(image::Format::RGB, total_width, total_height);
 			contact_sheet.clear_to_black();
@@ -138,7 +139,7 @@ namespace image_processing
 			}
 
 			// write all images to the contact sheet
-			int y_off = ImageTopBorder;
+			int y_off = image_top_border;
 			for (size_t y = 0; y < num_images_high; ++y)
 			{
 				int x_off = ImageBorder;
@@ -192,13 +193,13 @@ namespace image_processing
 						img->get_width(), InfoRectHeight, cv::Scalar(96, 96, 96, 0));
 
 					contact_sheet.draw_string(
-						node->get_entries()[0].Annotation, 
+						node->get_entries()[0].Annotation,
 						info_x + InfoRectPadding, 
 						info_y + InfoRectPadding, FontScale, FontThickness, image::Anchor::TopLeft);
 
 					x_off += max_image_width + ImageBorder;
 				}
- 				y_off += max_image_height + ImageBorder;
+ 				y_off += max_image_height + ImageBorder + InfoRectHeight;
 			}
 
 			// write the contact sheet to disk
