@@ -478,7 +478,7 @@ namespace runtime
 			fs::path output_path(output_dir);
 			output_path /= (fname + ".rst");
 
-			FILE* file = fopen(output_path.c_str(), "w+b");
+			FILE* file = fopen(output_path.string().c_str(), "w+b");
 			fprintf(file, "%s\n", title.c_str());
 			fprintf(file, "%s\n\n", std::string(title.length(), '=').c_str());
 			fprintf(file, ".. toctree::\n");
