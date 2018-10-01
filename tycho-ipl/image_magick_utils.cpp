@@ -57,7 +57,7 @@ namespace image_magick_utils
 			for (int x = 0; x < width; ++x)
 			{
 				const auto& psrc = src.at<Vec3b>(y, x);
-				dst.pixelColor(x, y, Magick::Color(psrc[0], psrc[1], psrc[2]));
+				dst.pixelColor(x, y, Magick::Color(psrc[2], psrc[1], psrc[0]));
 			}
 		}
 
@@ -80,9 +80,9 @@ namespace image_magick_utils
 			{
 				auto& pdst = dst.at<Vec3b>(y, x);
 				const auto& psrc = src.pixelColor(x, y);
-				pdst[0] = psrc.quantumRed();
+				pdst[0] = psrc.quantumBlue(); 
 				pdst[1] = psrc.quantumGreen();
-				pdst[2] = psrc.quantumBlue();
+				pdst[2] = psrc.quantumRed();
 			}
 		}
 

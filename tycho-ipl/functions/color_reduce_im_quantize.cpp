@@ -93,7 +93,7 @@ namespace functions
 		im::Image im_img;
 		image_magick_utils::convert_to_im(*in_src, im_img);
 
-		im_img.quantizeColorSpace(im::LabColorspace);
+		im_img.quantizeColorSpace(im::RGBColorspace);
 		im_img.quantizeColors(num_colors);
 		im_img.quantizeDitherMethod(im::NoDitherMethod);
 		im_img.quantize();
