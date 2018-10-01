@@ -1,15 +1,15 @@
 Command line driver
 ===================
 
-A command line tool ``ty_ipl_driver`` is supplied to run scripts over a
-single or a set of images. You can run scripts on a set of images for a given range of parameters.
-You can supply script input parameters on the command line as a comma separated list
-and it will run the script repeatedly for each of the parameters.
-You can also specify a response file using ``@<filename>`` as a single command line parameters and
-it will read the command line options from there instead.
-
+A command line tool ``ty_ipl_driver`` is supplied to run scripts over a single
+or a set of images. You can run scripts on a set of images for a given range of
+parameters. You can supply script input parameters on the command line as a
+comma separated list and it will run the script repeatedly for each of the
+parameters. You can also specify a response file using ``@<filename>`` as a
+single command line parameters and it will read the command line options from
+there instead.
 The command line is in the following format with each of the sections described
-in more detail below. Note that image path can also contain wildcards (? or *)
+in more detail below. Note that image path can also contain wildcards (? or \*)
 to run the script over multiple images.
 
 ``ty_ipl_driver <options> <parameters> <input-program> <image-path>``
@@ -31,12 +31,15 @@ to run the script over multiple images.
 
 **Parameters**
 
-Each script can declare any number of input parameters. On the command line these take the format
-of key=value pairs where the key is the parameter name and value is a comma seperated list
-of values, i.e. ``kernel_size=3`` or ``kernel_size=3,5,7``. This allows you to iterate over a set of
-values to visualise the effect they have on a given script.
+Each script can declare any number of input parameters. On the command line
+these take the format of key=value pairs where the key is the parameter name
+and value is a comma seperated list of values, i.e. ``kernel_size=3`` or
+``kernel_size=3,5,7``. This allows you to iterate over a set of values to
+visualise the effect they have on a given script.
 
-As an example the following script will take an input file, clamp it to a maximum of 1024 pixels on the longest edge and then run a kuwahara filter on it and output the result.
+As an example the following script will take an input file, clamp it to a
+maximum of 1024 pixels on the longest edge and then run a kuwahara filter on it
+and output the result.
 
 ::
 
@@ -55,7 +58,9 @@ Calling this from the driver program (ty_ipl_driver) like this
 
     ty_ipl_driver --experiment --contact --output_dir=./temp kernel_size=3,7,11,15 test_filter.fx image.jpg
 
-Will result in the filter being run four time, once for each of the supplied kernel sizes and all the images being output to the temp directory in the following structure.
+Will result in the filter being run four time, once for each of the supplied
+kernel sizes and all the images being output to the temp directory in the
+following structure.
 
 ::
 
@@ -66,7 +71,8 @@ Will result in the filter being run four time, once for each of the supplied ker
             |              |---image.jpg
             |---test_filter-contact_sheet-YYYY-MM-DD-HH-MM-SS.jpg
 
-A contact sheet will also be generated showing all of the images for easy comparison.
+A contact sheet will also be generated showing all of the images for easy
+comparison.
 
 .. image:: ../images/kuwahara_lenna.jpg
 

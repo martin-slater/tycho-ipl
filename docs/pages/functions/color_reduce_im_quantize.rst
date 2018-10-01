@@ -20,3 +20,4 @@ Reduces the number of colors in the image to a specified number.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/color_reduce_im_quantize.png

@@ -29,7 +29,8 @@ and specifier is one of
 
 **Default variables**
 
-The runtime exposes the following variables automatically to the executing script.
+The runtime exposes the following variables automatically to the executing
+script.
 
 .. csv-table::
     :header: "name", "type", "description"

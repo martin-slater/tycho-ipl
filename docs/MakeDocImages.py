@@ -52,7 +52,7 @@ BUILD_DIR = os.path.join(BASE_DIR, '..', 'build', 'bin')
 FUNCTION_DOC_DIR = os.path.join(BASE_DIR, 'pages', 'functions')
 
 if platform.system() == 'Windows':
-    BUILD_DIR = os.path.join(BUILD_DIR, 'Debug')
+    BUILD_DIR = os.path.join(BUILD_DIR, 'Release')
 
 DRIVER_PATH = os.path.join(BUILD_DIR, 'ty_ipl_driver')
 
@@ -119,15 +119,22 @@ PARAM1_FUNCTIONS = [
     ( 'auto_level_histogram_clip', ( 'float', 'clip_percent', [0.0, 1.0, 2.0, 4.0, 8.0])),
     ( 'color_reduce_libimagequant', ( 'int', 'num_colors', [0, 4, 16, 256, 1024])),
     ( 'color_reduce_median_cut', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
+    ( 'color_reduce_im_quantize', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
     ( 'gaussian_blur', ( 'int', 'kernel_size', [3, 5, 7, 9])),
     ( 'remove_intensity', ( 'int', 'black-cutoff', [1, 4, 8, 16])),
     ( 'edge_canny', ( 'int', 'kernel_size', [3, 5, 7])),
     ( 'adaptive_edge_laplacian', ( 'int', 'edge_percent', [5, 10, 15, 20])),
     ( 'edge_laplacian', ( 'int', 'kernel_size', [1, 3, 5, 7, 9])),
     ( 'edge_sobel', ( 'int', 'kernel_size', [1, 3, 5, 7])),
-
-
 ]
+
+PARAM2_FUNCTIONS = [
+    ( 'color_reduce_im_mean_shift', [
+        ( 'int', 'kernel_size', [3, 5, 7, 9]),
+        ( 'float', 'color_distance', [0.1, 0.2, 0.4, 0.8, 1.0])
+    ]),
+]
+
 
 #------------------------------------------------------------------------------
 # A whole lot of messing around for deleting a directory and all its contents
@@ -196,6 +203,7 @@ class MakeDocImages(object):
         """ Constructor """
 
     def run(self):
+        self._param2_funcs()
         self._scaled_binary_funcs()
         self._param1_funcs()
         self._unary_funcs()
@@ -235,22 +243,34 @@ class MakeDocImages(object):
                     call experiment_add_image(name="mask", src=src2);
                     call %s(src1=__src__, src2=src2, scale=scale, dst=__dst__);
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
-            args = 'scale' + '=' + ','.join([str(e) for e in [0.0, 0.1, 0.2, 0.4, 0.8, 1.0]])
-            self._execute_script(func, script, 'nature.png', args)
+            arg = ('float', 'scale', [0.0, 0.1, 0.2, 0.4, 0.8, 1.0])
+            self._execute_script(func, script, 'nature.png', arg)
 
     def _param1_funcs(self):
         for func in PARAM1_FUNCTIONS:
             f = func[0]
             t = func[1][0]
             a = func[1][1]
-            n = func[1][2]
             script = '''
                     input %s %s = 0;
                     call experiment_add_image(name="source", src=__src__);
                     call %s(src=__src__, dst=__dst__, %s=%s);
                     ''' % (t, a, f, a, a)
-            args = a + '=' + ','.join([str(e) for e in n])
-            self._execute_script(f, script, 'nature.png', args)
+            self._execute_script(f, script, 'nature.png', func[1])
+
+    def _param2_funcs(self):
+        for func in PARAM2_FUNCTIONS:
+            f = func[0]
+            t0 = func[1][0][0]
+            a0 = func[1][0][1]
+            t1 = func[1][1][0]
+            a1 = func[1][1][1]
+            script = '''
+                    input %s %s = 0;
+                    input %s %s = 0;
+                    call %s(src=__src__, dst=__dst__, %s=%s, %s=%s);
+                    ''' % (t0, a0, t1, a1, f, a0, a0, a1, a1)
+            self._execute_script(f, script, 'nature.png', func[1][0], func[1][1])
 
     def _execute_script(self, func, script, source_image,  *args):
         temp_dir = tempfile.mkdtemp(prefix='fx_')
@@ -269,12 +289,16 @@ class MakeDocImages(object):
         dst = os.path.join(OUTPUT_DIR, func + '.png')
         shutil.copyfile(output, dst)
         rmtree(temp_dir)
-        os.unlink(fname)
+
+        # this dies on my windows box, maybe anti virus?
+        if not platform.system() == 'Windows':
+            os.unlink(fname)
 
     def _execute(self, script_path, image_path, temp_dir, *args):
         cmd = [DRIVER_PATH, '--experiment', '--output_dir=' + temp_dir]
         for arg in args:
-            cmd.append(arg)
+            sarg = arg[1] + '=' + ','.join([str(e) for e in arg[2]])
+            cmd.append(sarg)
         cmd.append(script_path)
         cmd.append(image_path)
         print(' '.join(cmd))
