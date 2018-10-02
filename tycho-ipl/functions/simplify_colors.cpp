@@ -47,7 +47,10 @@ namespace image_processing
 namespace functions
 {
 	static const char Name[] = "simplify_colors";
-	static const char Desc[] = "Simply the colors used in the image";
+	static const char Desc[] = 
+		"Simply the colors used in the image. This is not useful for general color reduction "
+		"but can be useful when using logo type images that have antialiasing that needs "
+		"to be removed to leave only the most dominant colors in the image";
 
 	static const std::vector<param_desc> Inputs = {
 		function::DefaultInput(),
@@ -199,6 +202,7 @@ namespace functions
 		small_src->clamp_size(128, false, image::Interpolation::Nearest);
 
 		detailed_palette palette;
+		small_src->get_detailed_palette_information(palette);
 
 		// sort by the axis with the largest range
 		int rmin = INT_MAX, rmax = -1;
