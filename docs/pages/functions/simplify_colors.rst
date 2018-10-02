@@ -21,3 +21,4 @@ Simply the colors used in the image
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/simplify_colors.png

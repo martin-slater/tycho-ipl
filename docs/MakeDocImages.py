@@ -65,7 +65,6 @@ UNARY_FUNCTIONS = [
     'max',
     'sepia_rgb',
     'visualize_palette',
-    #'simplify_colors'
 ]
 
 # binary functions
@@ -129,6 +128,11 @@ PARAM1_FUNCTIONS = [
 ]
 
 PARAM2_FUNCTIONS = [
+    ('simplify_colors', [
+        ( 'float', 'merge_distance', [0.2, 0.4, 0.8, 1.6, 3.2]),
+        ( 'float', 'min_coverage', [0.1, 0.2, 0.4, 0.8, 1.6])
+    ]),
+
     ( 'color_reduce_im_mean_shift', [
         ( 'int', 'kernel_size', [3, 5, 7, 9]),
         ( 'float', 'color_distance', [0.1, 0.2, 0.4, 0.8, 1.0])
@@ -203,10 +207,10 @@ class MakeDocImages(object):
         """ Constructor """
 
     def run(self):
+        self._unary_funcs()
         self._param2_funcs()
         self._scaled_binary_funcs()
         self._param1_funcs()
-        self._unary_funcs()
         self._binary_funcs()
 
         # update function docs
