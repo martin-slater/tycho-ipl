@@ -22,3 +22,4 @@ Simply the colors used in the image. This is not useful for general color reduct
    "**dst**", "*image*", "", "Destination image"
 
 .. image:: images/simplify_colors.png
+.. image:: images/simplify_colors_1.png

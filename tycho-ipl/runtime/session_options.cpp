@@ -433,32 +433,48 @@ namespace runtime
 				fprintf(file, "\n");
 			}
 
-			fs::path image_path(output_dir);
-			image_path /= "images";
-			std::string img_name = (fname + ".png");
-			image_path /= img_name ;
-			bool found_img = false;
-			if (fs::exists(image_path))
+			int image_idx = 0;
+			while (true)
 			{
-				found_img = true;
-			}
-			else
-			{
-				// look for jpg
-				image_path = fs::path{ output_dir };
+				fs::path image_path{ output_dir };
 				image_path /= "images";
-				img_name = (fname + ".jpg");
+				char img_name[256] = { 0 };
+				if(image_idx == 0)
+					sprintf(img_name, "%s.png", fname.c_str());
+				else
+					sprintf(img_name, "%s_%d.png", fname.c_str(), image_idx);
+
 				image_path /= img_name;
+				bool found_img = false;
 				if (fs::exists(image_path))
 				{
 					found_img = true;
 				}
+				else
+				{
+					// look for jpg
+					image_path = fs::path{ output_dir };
+					image_path /= "images";
+					if (image_idx == 0)
+						sprintf(img_name, "%s.jpg", fname.c_str());
+					else
+						sprintf(img_name, "%s_%d.jpg", fname.c_str(), image_idx);
+					image_path /= img_name;
+					if (fs::exists(image_path))
+					{
+						found_img = true;
+					}
+				}
+				if (found_img)
+				{
+					fprintf(file, ".. image:: images/%s\n", img_name);
+				}
+				else
+				{
+					break;
+				}
+				++image_idx;
 			}
-			if (found_img)
-			{
-				fprintf(file, ".. image:: images/%s\n", img_name.c_str());
-			}
-
 			fclose(file);
 
 			auto it = func_map.find(func->get_group());

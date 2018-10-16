@@ -122,7 +122,7 @@ PARAM_FUNCTIONS = [
             ( 'float', 'merge_distance', [0.2, 0.4, 0.8, 1.6, 3.2]),
             ( 'float', 'min_coverage', [0.1, 0.2, 0.4, 0.8, 1.6])
             ]),
-        'image': 'linux-logo.jpg',
+        'image': ['linux-logo.jpg', 'logo.png' ],
         'visualize_palette': True
     },
     { 'function': ('sepia_yiq', [( 'int', 'offset', [-20, -10, 0, 10, 20]) ]) },
@@ -237,7 +237,7 @@ class MakeDocImages(object):
                     call experiment_add_image(name="source", src=__src__);
                     call %s(src=__src__, dst=__dst__);
                     ''' % (func)
-            self._execute_script(func, script, 'nature.png')
+            self._execute_script(func, 0, script, 'nature.png')
 
     def _binary_funcs(self, funcs):
         for func in funcs:
@@ -248,7 +248,7 @@ class MakeDocImages(object):
                     call experiment_add_image(name="mask", src=src2);
                     call %s(src1=__src__, src2=src2, dst=__dst__);
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
-            self._execute_script(func, script, 'nature.png')
+            self._execute_script(func, 0, script, 'nature.png')
 
     def _scaled_binary_funcs(self, funcs):
         for func in funcs:
@@ -261,12 +261,14 @@ class MakeDocImages(object):
                     call %s(src1=__src__, src2=src2, scale=scale, dst=__dst__);
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
             arg = ('float', 'scale', [0.0, 0.1, 0.2, 0.4, 0.8, 1.0])
-            self._execute_script(func, script, 'nature.png', arg)
+            self._execute_script(func, 0, script, 'nature.png', arg)
 
     def _param_funcs(self, funcs):
         for dfunc in funcs:
             func = dfunc['function']
-            image = dfunc['image'] if 'image' in dfunc else 'nature.png'
+            images = dfunc['image'] if 'image' in dfunc else 'nature.png'
+            if isinstance(images, basestring):
+                images = [images]
             vpalette = 'visualize_palette' in dfunc and dfunc['visualize_palette']
             fname = func[0]
             params = func[1]
@@ -299,9 +301,13 @@ class MakeDocImages(object):
                     ''' % (input_decls, fname, args)
             if vpalette:
                 script += 'call visualize_palette(src=__dst__, dst=__dst__);'
-            self._execute_script(fname, script, image, *(func[1]))  
 
-    def _execute_script(self, func, script, source_image,  *args):
+            idx = 0
+            for image in images:
+                self._execute_script(fname, idx, script, image, *(func[1])) 
+                idx += 1
+
+    def _execute_script(self, func, idx, script, source_image,  *args):
         temp_dir = tempfile.mkdtemp(prefix='fx_')
         fname = tempfile.mkstemp(suffix='.fx', prefix=func + '_')[1]
         if platform.system() != 'Windows':
@@ -315,7 +321,12 @@ class MakeDocImages(object):
         self._execute(fname, os.path.join(IMAGE_DIR, source_image), temp_dir, *args)
         # get the output and copy to the correct directory
         output = self._find_contact_sheet(temp_dir)
-        dst = os.path.join(OUTPUT_DIR, func + '.png')
+        dst = ''
+        if idx == 0:
+            dst = os.path.join(OUTPUT_DIR, func + '.png')
+        else:
+            dst = os.path.join(OUTPUT_DIR, func + '_' + str(idx) + '.png')
+
         shutil.copyfile(output, dst)
         rmtree(temp_dir)
 
