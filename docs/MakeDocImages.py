@@ -110,33 +110,47 @@ SCALED_BINARY_FUNCTIONS = [
 ]
 
 # parameterized functions
-PARAM1_FUNCTIONS = [
-    ( 'sepia_yiq', ( 'int', 'offset', [-20, -10, 0, 10, 20])),
-    ( 'kuwahara', ( 'int', 'kernel_size', [3, 5, 7, 9])),
-    ( 'gamma_correct', ( 'float', 'gamma', [0.5, 1.0, 1.5, 2.0])),
-    ( 'denoise', ( 'float', 'strength', [1, 3, 6, 9])),
-    ( 'auto_level_histogram_clip', ( 'float', 'clip_percent', [0.0, 1.0, 2.0, 4.0, 8.0])),
-    ( 'color_reduce_libimagequant', ( 'int', 'num_colors', [0, 4, 16, 256, 1024])),
-    ( 'color_reduce_median_cut', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
-    ( 'color_reduce_im_quantize', ( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])),
-    ( 'gaussian_blur', ( 'int', 'kernel_size', [3, 5, 7, 9])),
-    ( 'remove_intensity', ( 'int', 'black-cutoff', [1, 4, 8, 16])),
-    ( 'edge_canny', ( 'int', 'kernel_size', [3, 5, 7])),
-    ( 'adaptive_edge_laplacian', ( 'int', 'edge_percent', [5, 10, 15, 20])),
-    ( 'edge_laplacian', ( 'int', 'kernel_size', [1, 3, 5, 7, 9])),
-    ( 'edge_sobel', ( 'int', 'kernel_size', [1, 3, 5, 7])),
-]
-
-PARAM2_FUNCTIONS = [
-    ('simplify_colors', [
-        ( 'float', 'merge_distance', [0.2, 0.4, 0.8, 1.6, 3.2]),
-        ( 'float', 'min_coverage', [0.1, 0.2, 0.4, 0.8, 1.6])
-    ]),
-
-    ( 'color_reduce_im_mean_shift', [
-        ( 'int', 'kernel_size', [3, 5, 7, 9]),
-        ( 'float', 'color_distance', [0.1, 0.2, 0.4, 0.8, 1.0])
-    ]),
+PARAM_FUNCTIONS = [
+    { 
+        'function':( 'color_reduce_libimagequant', [
+            ( 'int', 'num_colors', [0, 4, 16, 256, 1024])
+            ]),
+        'visualize_palette': True
+    },
+    { 
+        'function':('simplify_colors', [
+            ( 'float', 'merge_distance', [0.2, 0.4, 0.8, 1.6, 3.2]),
+            ( 'float', 'min_coverage', [0.1, 0.2, 0.4, 0.8, 1.6])
+            ]),
+        'image': 'linux-logo.jpg',
+        'visualize_palette': True
+    },
+    { 'function': ('sepia_yiq', [( 'int', 'offset', [-20, -10, 0, 10, 20]) ]) },
+    { 'function':( 'kuwahara', [( 'int', 'kernel_size', [3, 5, 7, 9])])    },
+    { 'function':( 'gamma_correct', [( 'float', 'gamma', [0.5, 1.0, 1.5, 2.0])]) },
+    { 'function':( 'denoise', [( 'float', 'strength', [1, 3, 6, 9])]) },
+    { 'function':( 'auto_level_histogram_clip', [( 'float', 'clip_percent', [0.0, 1.0, 2.0, 4.0, 8.0])]) },
+    { 
+        'function':( 'color_reduce_median_cut', [( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])]),
+        'visualize_palette': True
+    },
+    { 
+        'function':( 'color_reduce_im_quantize', [( 'int', 'num_colors', [8, 16, 32, 64, 128, 256])]),
+        'visualize_palette': True
+    },
+    { 'function':( 'gaussian_blur', [( 'int', 'kernel_size', [3, 5, 7, 9])])    },
+    { 'function':( 'remove_intensity', [( 'int', 'black-cutoff', [1, 4, 8, 16])])    },
+    { 'function':( 'edge_canny', [( 'int', 'kernel_size', [3, 5, 7])]) },
+    { 'function':( 'adaptive_edge_laplacian', [( 'int', 'edge_percent', [5, 10, 15, 20])]) },
+    { 'function':( 'edge_laplacian', [( 'int', 'kernel_size', [1, 3, 5, 7, 9])]) },
+    { 'function':( 'edge_sobel', [( 'int', 'kernel_size', [1, 3, 5, 7])])    },
+    {
+        'function':('color_reduce_im_mean_shift', [
+            ( 'int', 'kernel_size', [3, 5, 7, 9]),
+            ( 'float', 'color_distance', [0.1, 0.2, 0.4, 0.8, 1.0])
+            ]),
+        'visualize_palette': True
+    }
 ]
 
 
@@ -207,27 +221,26 @@ class MakeDocImages(object):
         """ Constructor """
 
     def run(self):
-        self._unary_funcs()
-        self._param2_funcs()
-        self._scaled_binary_funcs()
-        self._param1_funcs()
-        self._binary_funcs()
+        self._unary_funcs(UNARY_FUNCTIONS)
+        self._param_funcs(PARAM_FUNCTIONS)
+        self._scaled_binary_funcs(SCALED_BINARY_FUNCTIONS)
+        self._binary_funcs(BINARY_FUNCTIONS)
 
         # update function docs
         args =[DRIVER_PATH, '--sphinx=' + FUNCTION_DOC_DIR]
         print(' '.join(args))
         subprocess.call(args)
 
-    def _unary_funcs(self):
-        for func in UNARY_FUNCTIONS:
+    def _unary_funcs(self, funcs):
+        for func in funcs:
             script = '''
                     call experiment_add_image(name="source", src=__src__);
                     call %s(src=__src__, dst=__dst__);
                     ''' % (func)
             self._execute_script(func, script, 'nature.png')
 
-    def _binary_funcs(self):
-        for func in BINARY_FUNCTIONS:
+    def _binary_funcs(self, funcs):
+        for func in funcs:
             script = '''
                     input image src2;
                     call load_image(path="%s", dst=src2);
@@ -237,8 +250,8 @@ class MakeDocImages(object):
                     ''' % (os.path.join(IMAGE_DIR, 'mask1.png'), func)
             self._execute_script(func, script, 'nature.png')
 
-    def _scaled_binary_funcs(self):
-        for func in SCALED_BINARY_FUNCTIONS:
+    def _scaled_binary_funcs(self, funcs):
+        for func in funcs:
             script = '''
                     input float scale;
                     input image src2;
@@ -250,31 +263,43 @@ class MakeDocImages(object):
             arg = ('float', 'scale', [0.0, 0.1, 0.2, 0.4, 0.8, 1.0])
             self._execute_script(func, script, 'nature.png', arg)
 
-    def _param1_funcs(self):
-        for func in PARAM1_FUNCTIONS:
-            f = func[0]
-            t = func[1][0]
-            a = func[1][1]
-            script = '''
-                    input %s %s = 0;
-                    call experiment_add_image(name="source", src=__src__);
-                    call %s(src=__src__, dst=__dst__, %s=%s);
-                    ''' % (t, a, f, a, a)
-            self._execute_script(f, script, 'nature.png', func[1])
+    def _param_funcs(self, funcs):
+        for dfunc in funcs:
+            func = dfunc['function']
+            image = dfunc['image'] if 'image' in dfunc else 'nature.png'
+            vpalette = 'visualize_palette' in dfunc and dfunc['visualize_palette']
+            fname = func[0]
+            params = func[1]
+            input_decls = ''
+            args = ''
+            first = True
+            for param in params:
+                type = param[0]
+                pname = param[1]
+                input_decls += 'input %s %s = 0;\n' % (type, pname)
+                if not first:
+                    args += ', '
+                args += '%s=%s' % (pname, pname)
+                first = False
 
-    def _param2_funcs(self):
-        for func in PARAM2_FUNCTIONS:
-            f = func[0]
-            t0 = func[1][0][0]
-            a0 = func[1][0][1]
-            t1 = func[1][1][0]
-            a1 = func[1][1][1]
-            script = '''
-                    input %s %s = 0;
-                    input %s %s = 0;
-                    call %s(src=__src__, dst=__dst__, %s=%s, %s=%s);
-                    ''' % (t0, a0, t1, a1, f, a0, a0, a1, a1)
-            self._execute_script(f, script, 'nature.png', func[1][0], func[1][1])
+            script = ''
+            if len(params) == 1:
+                if vpalette:
+                    script += '''
+                        temp    image tsrc;
+                        call copy(src=__src__, dst=tsrc);
+                        call visualize_palette(src=tsrc, dst=tsrc);
+                        call experiment_add_image(name="source", src=tsrc);
+                    '''
+                else:
+                    script += 'call experiment_add_image(name="source", src=__src__);'
+            script += '''
+                    %s
+                    call %s(src=__src__, dst=__dst__, %s);
+                    ''' % (input_decls, fname, args)
+            if vpalette:
+                script += 'call visualize_palette(src=__dst__, dst=__dst__);'
+            self._execute_script(fname, script, image, *(func[1]))  
 
     def _execute_script(self, func, script, source_image,  *args):
         temp_dir = tempfile.mkdtemp(prefix='fx_')
@@ -300,7 +325,9 @@ class MakeDocImages(object):
 
     def _execute(self, script_path, image_path, temp_dir, *args):
         cmd = [DRIVER_PATH, '--experiment', '--output_dir=' + temp_dir]
+        print(args)
         for arg in args:
+            print(arg)
             sarg = arg[1] + '=' + ','.join([str(e) for e in arg[2]])
             cmd.append(sarg)
         cmd.append(script_path)

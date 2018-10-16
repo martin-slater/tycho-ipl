@@ -1,7 +1,7 @@
 simplify_colors(src, merge_distance, min_coverage)
 ==================================================
 
-Simply the colors used in the image
+Simply the colors used in the image. This is not useful for general color reduction but can be useful when using logo type images that have antialiasing that needs to be removed to leave only the most dominant colors in the image
 
 **Inputs**
 
