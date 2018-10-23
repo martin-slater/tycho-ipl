@@ -89,7 +89,7 @@ namespace image_processing
 
 		// add function constants
 		m_FunctionFactory.enumerate(
-			std::bind(&program::SetFunctionConstants, this, std::placeholders::_1));
+			std::bind(&program::set_function_constants, this, std::placeholders::_1));
 
 		// add some built-in constants
 		add_constant_integer("FORMAT_RGB", (int)image::Format::RGB);
@@ -744,7 +744,7 @@ namespace image_processing
 
 	//----------------------------------------------------------------------------
 
-	void program::SetFunctionConstants(const function* func)
+	void program::set_function_constants(const function* func)
 	{
 		if (func->has_constants())
 		{

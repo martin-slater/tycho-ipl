@@ -214,7 +214,7 @@ namespace image_processing
 		void check_for_unused(const declaration_list&);
 		void add_declaration(declaration_list& dst_list, const declaration& decl);
 		void add_internal_declaration(declaration_list& dst_list, declaration decl);
-		void SetFunctionConstants(const function*);
+		void set_function_constants(const function*);
 		void add_constant_integer(const char* name, int val);
 
 	private:
