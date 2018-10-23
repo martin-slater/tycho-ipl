@@ -434,6 +434,7 @@ namespace runtime
 			}
 
 			int image_idx = 0;
+			bool have_image = false;
 			while (true)
 			{
 				fs::path image_path{ output_dir };
@@ -468,6 +469,7 @@ namespace runtime
 				if (found_img)
 				{
 					fprintf(file, ".. image:: images/%s\n", img_name);
+					have_image = true;
 				}
 				else
 				{
@@ -476,6 +478,11 @@ namespace runtime
 				++image_idx;
 			}
 			fclose(file);
+
+			if (!have_image)
+			{
+				fprintf(stderr, "%s does not have any documentation images\n", func->get_simple_signature().c_str());
+			}
 
 			auto it = func_map.find(func->get_group());
 			if (it == func_map.end())
