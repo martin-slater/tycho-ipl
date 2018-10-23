@@ -21,3 +21,5 @@ erode the image.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/erode.png
+.. image:: images/erode_1.png

@@ -111,6 +111,39 @@ SCALED_BINARY_FUNCTIONS = [
 
 # parameterized functions
 PARAM_FUNCTIONS = [
+    {
+        'function':( 'threshold', [
+            ( 'int', 'type', ['THRESH_BINARY', 'THRESH_BINARY_INV', 'THRESH_TRUNC', 'THRESH_TOZERO', 'THRESH_TOZERO_INV']),
+            ( 'int', 'threshold', [0,16,32,64,128,255])
+        ]),
+        'image': ['sudoku.jpeg']
+    },
+    {
+        'function':( 'image_adjust', [
+            ( 'int', 'brightness', [0,8,16,32,64,128]),
+            ( 'float', 'contrast', [0.0, 0.1, 0.2, 0.4, 0.8, 1.6])
+        ])        
+    },
+    {
+        'function':( 'bilateral', [
+            ( 'int', 'filter_size', [3,5,7,9]),
+            ( 'int', 'iterations', [1, 2, 4, 8])
+        ])        
+    },
+    {
+        'function':( 'dilate', [
+            ( 'int', 'size', [3,5,7,9,11]),
+            ( 'int', 'element', [ 'MORPH_RECT', 'MORPH_CROSS', 'MORPH_ELLIPSE'])
+        ]),
+        'image': ['mask1.png', 'linux-logo.jpg'],
+    },
+    {
+        'function':( 'erode', [
+            ( 'int', 'size', [3,5,7,9,11]),
+            ( 'int', 'element', [ 'MORPH_RECT', 'MORPH_CROSS', 'MORPH_ELLIPSE'])
+        ]),
+        'image': ['mask1.png', 'linux-logo.jpg'],
+    },
     { 
         'function':( 'color_reduce_libimagequant', [
             ( 'int', 'num_colors', [0, 4, 16, 256, 1024])
@@ -149,6 +182,18 @@ PARAM_FUNCTIONS = [
             ( 'int', 'kernel_size', [3, 5, 7, 9]),
             ( 'float', 'color_distance', [0.1, 0.2, 0.4, 0.8, 1.0])
             ]),
+        'visualize_palette': True
+    },
+    {
+    'function':('oil_painting', [
+        ( 'int', 'kernel_size', [3, 5, 7, 9]),
+        ( 'int', 'levels', [5, 10, 20, 30, 49])
+        ])
+    },
+    {
+        'function':('color_reduce_kmeans', [
+            ( 'int', 'num_colors', [4, 8, 16, 32, 64, 127, 256 ]),        
+        ]),
         'visualize_palette': True
     }
 ]
@@ -219,12 +264,14 @@ class MakeDocImages(object):
 
     def __init__(self, args):
         """ Constructor """
+        self._docs_only = args.docs_only
 
     def run(self):
-        self._unary_funcs(UNARY_FUNCTIONS)
-        self._param_funcs(PARAM_FUNCTIONS)
-        self._scaled_binary_funcs(SCALED_BINARY_FUNCTIONS)
-        self._binary_funcs(BINARY_FUNCTIONS)
+        if not self._docs_only:
+            self._unary_funcs(UNARY_FUNCTIONS)
+            self._param_funcs(PARAM_FUNCTIONS)
+            self._scaled_binary_funcs(SCALED_BINARY_FUNCTIONS)
+            self._binary_funcs(BINARY_FUNCTIONS)
 
         # update function docs
         args =[DRIVER_PATH, '--sphinx=' + FUNCTION_DOC_DIR]
@@ -336,9 +383,7 @@ class MakeDocImages(object):
 
     def _execute(self, script_path, image_path, temp_dir, *args):
         cmd = [DRIVER_PATH, '--experiment', '--output_dir=' + temp_dir]
-        print(args)
         for arg in args:
-            print(arg)
             sarg = arg[1] + '=' + ','.join([str(e) for e in arg[2]])
             cmd.append(sarg)
         cmd.append(script_path)
@@ -366,9 +411,9 @@ class MakeDocImages(object):
 def main():
     """ Main script entry point """
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('-a', '--arg',
-                        help='A boolean arg',
-                        dest='barg', action='store_true')
+    parser.add_argument('-d', '--docs',
+                        help='Only rebuild documentation',
+                        dest='docs_only', action='store_true')
     args = parser.parse_args()
     MakeDocImages(args).run()
 

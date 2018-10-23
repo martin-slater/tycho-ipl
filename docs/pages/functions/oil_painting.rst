@@ -21,3 +21,4 @@ Transform the image to have an oil painted appearance
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/oil_painting.png

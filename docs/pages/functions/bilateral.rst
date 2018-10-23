@@ -23,3 +23,4 @@ Apply bilateral filter to the image. This maintains edges and softens flat regio
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/bilateral.png

@@ -21,3 +21,5 @@ dilate the image.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/dilate.png
+.. image:: images/dilate_1.png

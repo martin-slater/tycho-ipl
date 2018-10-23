@@ -21,3 +21,4 @@ Adjust the contrast and brightness of an image
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/image_adjust.png

@@ -10,7 +10,7 @@ Reduces the number of colors in the image to a specified number.
    :widths: 20,10,10,60
 
    "**src**", "*image*", "", "Source image"
-   "**num_colors**", "*int*", "256", "Number of colors to reduce the image to. If it is 0 then it will automatically determine the number of colors."
+   "**num_colors**", "*int*", "256", "Number of colors to reduce the image to. Must be greater than 0"
    "**num_attempts**", "*int*", "1", "Number of iterations to search for a result"
    "**term_epsilon**", "*int*", "50", "Termination epsilon"
    "**term_iterations**", "*int*", "4", "Number of iterations to search for a result"
@@ -23,3 +23,4 @@ Reduces the number of colors in the image to a specified number.
 
    "**dst**", "*image*", "", "Destination image"
 
+.. image:: images/color_reduce_kmeans.png
