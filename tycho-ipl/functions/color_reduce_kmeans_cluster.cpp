@@ -50,7 +50,7 @@ namespace functions
 		function::DefaultInput(),
 		param_desc(ObjectType::Integer,
 		"num_colors",
-		"Number of colors to reduce the image to. If it is 0 then it will automatically determine the number of colors.",
+		"Number of colors to reduce the image to. Must be greater than 0",
 		value::make_integer(256),
 		std::bind(validation::positive_integer, std::placeholders::_1, std::numeric_limits<int>::max())),
 
