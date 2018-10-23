@@ -63,10 +63,10 @@ namespace functions
 	{
 		image* src = inputs.get_image("src");
 
-		float bias = inputs.get_float("contrast");
-		int gain = inputs.get_integer("brightness");
+		float gain = inputs.get_float("contrast");
+		int bias = inputs.get_integer("brightness");
 		image* dst = src->clone();
-		execute(src, dst, bias, gain);
+		execute(src, dst, gain, bias);
 		outputs.set_image("dst", dst);
 		return true;
 	}
