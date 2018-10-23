@@ -76,7 +76,20 @@ namespace image_processing
 			// check to see if this input default has been overridden
 			value val;
 			if (!cinputs.try_get(c.Name, val))
+			{
 				val = c.Value;
+			}
+			else
+			{ 
+				if (val.get_type() == ObjectType::Name)
+				{
+					auto name = val.get_name();
+					if (m_SymbolTable.exists(name))
+					{
+						m_SymbolTable.try_get(name, val);
+					}
+				}
+			}
 			m_SymbolTable.set(c.Name, val);
 		}
 
