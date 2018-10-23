@@ -49,8 +49,14 @@ namespace functions
 
 	static const std::vector<param_desc> Inputs = {
 		function::DefaultInput(),
-		param_desc(ObjectType::Integer, "threshold", "Threshold value"),
-		param_desc(ObjectType::Integer, "maxval", "Maximum value to use with the THRESH_BINARY and THRESH_BINARY_INV thresholding types"),
+		param_desc(ObjectType::Integer, 
+			"threshold", 
+			"Threshold value",
+			value::make_integer(127)),
+		param_desc(ObjectType::Integer,
+			"maxval", 
+			"Maximum value to use with the THRESH_BINARY and THRESH_BINARY_INV thresholding types",
+			value::make_integer(127)),
 		param_desc(ObjectType::Integer, "type", "Thresholding type")
 	};
 
@@ -87,10 +93,16 @@ namespace functions
 	void threshold::execute(image* in_src, image* in_dst, int threshold, int maxval, int type)
 	{
 		using namespace cv;
+		image intensity {};
 
+		if (in_src->get_format() != image::Format::Grey)
+		{
+			in_src->convert_to(&intensity, image::Format::Grey);
+			in_src = &intensity;
+		}
 		Mat& src = *in_src->get_opencv();
 		Mat& dst = *in_dst->get_opencv();
-
+		
 		cv::threshold(src, dst, threshold, maxval, type);;
 	}
 
