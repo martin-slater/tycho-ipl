@@ -145,6 +145,8 @@ set( FUNCTION_SRCS
     functions/threshold.h
     functions/visualize_palette.cpp
     functions/visualize_palette.h
+    functions/image_correct_gray_world.h
+    functions/image_correct_gray_world.cpp
 )
 source_group("functions" FILES ${FUNCTION_SRCS})
 
