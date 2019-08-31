@@ -1,6 +1,0 @@
-{
-	"libname"         : "ImageProcessing",
-	"libname_upper"   : "IMAGEPROCESSING",
-	"libname_camel"   : "ImageProcessing",
-	"lib_abi"		  : "TYCHO_IMAGEPROCESSING_ABI"
-}	
