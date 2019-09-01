@@ -104,9 +104,11 @@ void image_correct_gray_world::execute(image *in_src, image *in_dst)
 	{
 		for (int x = 0; x < src.cols; x++)
 		{
-			dst.at<cv::Vec3b>(y, x)[RED] = cv::saturate_cast<uchar>(correctionR * (double)src.at<cv::Vec3b>(y, x)[RED]);
-			dst.at<cv::Vec3b>(y, x)[BLUE] = cv::saturate_cast<uchar>(correctionB * (double)src.at<cv::Vec3b>(y, x)[BLUE]);
-			dst.at<cv::Vec3b>(y, x)[GREEN] = src.at<cv::Vec3b>(y, x)[GREEN];
+			const auto& srcPixel = src.at<cv::Vec3b>(y, x);
+			auto& dstPixel = dst.at<cv::Vec3b>(y, x);
+			dstPixel[RED] = cv::saturate_cast<uchar>(correctionR * (double)srcPixel[RED]);
+			dstPixel[BLUE] = cv::saturate_cast<uchar>(correctionB * (double)srcPixel[BLUE]);
+			dstPixel[GREEN] = srcPixel[GREEN];
 		}
 	}
 }

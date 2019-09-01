@@ -1,1 +1,1 @@
---output_dir=./temp/uw --experiment --launch ./tests/filters/tests/test_underwater_colour_fix.fx ./tests/images/uw/*.*
+--output_dir=./temp/uw --experiment  --prefilter=./tests/filters/std_prefilter.fx --launch ./tests/filters/tests/test_underwater_colour_fix.fx ./tests/images/uw/*.*

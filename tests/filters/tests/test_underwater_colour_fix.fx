@@ -1,4 +1,4 @@
-temp image component_stretch, opencv, gw, gwc;
+temp image component_stretch, gw, gwc;
 
 call clamp_image_size(src = __src__, dst = __src__, size = 800);
 call auto_level_rgb_stretch(src = __src__, dst = component_stretch);
